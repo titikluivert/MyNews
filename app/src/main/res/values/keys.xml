@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="articleUrl" translatable="false">articleUrl</string>
+    <string name="results_from_search_activity" translatable="false">resultSearchActivity</string>
+</resources>
