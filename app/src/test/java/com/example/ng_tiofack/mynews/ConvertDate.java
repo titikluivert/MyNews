@@ -2,6 +2,7 @@ package com.example.ng_tiofack.mynews;
 
 import com.example.ng_tiofack.mynews.utils.Utils;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -18,18 +19,15 @@ public class ConvertDate {
     public void convert_date ()
     {
         String date = "2018-10-30T11:30:50-04:00";
-        assertEquals("30/10/2018", Utils.getConvertDate(date));
+        Assert.assertEquals("30/10/2018", Utils.getConvertDate(date));
 
         date = "2018-10-30";
-        assertEquals("30/10/2018", Utils.getConvertDate(date));
+        Assert.assertEquals("30/10/2018", Utils.getConvertDate(date));
     }
 
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
-
-
-
 
 }
