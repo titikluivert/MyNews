@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
  */
 public class ConvertDate {
 
-
     @Test
     public void convert_date ()
     {
