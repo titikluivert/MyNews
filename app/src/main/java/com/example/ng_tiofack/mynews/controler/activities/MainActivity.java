@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static int iD;
     SavedValues mySavedValues;
     private DrawerLayout drawerLayout;
+    private ViewPagerAdapter adapter;
+    private ViewPager viewPager;
 
 
     @Override
@@ -47,9 +49,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mySavedValues = Utils.getNotificationParam(this);
 
         TabLayout tabLayout = findViewById(R.id.tablayout_id);
-        ViewPager viewPager = findViewById(R.id.viewpager_id);
+        viewPager = findViewById(R.id.viewpager_id);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         //Adding Fragments
         adapter.addFragment(new TopStoriesFragment(), "TOP STORIES");
@@ -173,8 +175,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (resultCode == RESULT_OK) {
 
                 String resultString = data.getStringExtra(getString(R.string.results_from_search_activity));
-                List<Search.Response.Doc> resultResponseDoc = Utils.getResultfromJson(resultString);
-                int x = 9;
+                adapter.updateFragment(2, new TopStoriesFragment(), "SEARCH");
+                viewPager.setCurrentItem(2);
             }
             if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "no result was found", Toast.LENGTH_SHORT).show();

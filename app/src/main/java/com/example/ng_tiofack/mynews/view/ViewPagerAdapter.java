@@ -40,10 +40,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         mFragmentListTitles.add(Title);
     }
 
-    public void updateFragment(Fragment fragment, String Title, int pos) {
-        mFragmentList.add(fragment);
-        mFragmentListTitles.add(Title);
+    public void updateFragment(int pos, Fragment fragment, String title) {
         mFragmentList.remove(pos);
+        mFragmentListTitles.remove(pos);
+        mFragmentList.add(pos, fragment);
+        mFragmentListTitles.add(pos, title);
         notifyDataSetChanged();
     }
 }
