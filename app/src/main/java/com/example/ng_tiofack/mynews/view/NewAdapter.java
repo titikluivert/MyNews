@@ -31,8 +31,9 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> {
         this.glide = glide;
     }
 
+    @NonNull
     @Override
-    public NewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);

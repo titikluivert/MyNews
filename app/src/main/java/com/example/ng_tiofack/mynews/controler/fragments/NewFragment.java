@@ -10,16 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
-import com.example.ng_tiofack.mynews.model.Business;
 import com.example.ng_tiofack.mynews.model.Search;
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
-import com.example.ng_tiofack.mynews.view.BusinessAdapter;
+import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.view.NewAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,17 +31,17 @@ public class NewFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String result;
-   @BindView(R.id.fragment_business_recycler_view)
+   @BindView(R.id.fragment_news_recycler_view)
    RecyclerView recyclerView; // 1 - Declare RecyclerView
 
     // 1 - Declare the SwipeRefreshLayout
-    @BindView(R.id.fragment_business_swipe_container)
+    @BindView(R.id.fragment_news_swipe_container)
     SwipeRefreshLayout swipeRefreshLayout;
 
     // 2 - Declare list of results (MostPopular) & Adapter
     private List<Search.Response.Doc> myResultsList;
     private NewAdapter adapter;
-    Search.Response.Doc response;
+    private Search.Response.Doc response;
 
     public NewFragment() {
         // Required empty public constructor
@@ -62,7 +59,6 @@ public class NewFragment extends Fragment {
         NewFragment fragment = new NewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, result);
-      //  args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,10 +68,7 @@ public class NewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             result = getArguments().getString(ARG_PARAM1);
-            // convertir la string result en objet
-            // faire un update grade à la liste d'objets
-            //updateUI();
-           // mParam2 = getArguments().getString(ARG_PARAM2);
+            updateUI(Utils.getResultfromJson(result));
         }
     }
 
@@ -86,7 +79,6 @@ public class NewFragment extends Fragment {
         this.configureRecyclerView(); // - 3 Call during UI creation
         this.configureSwipeRefreshLayout();  // 4 - Configure the SwipeRefreshLayout
         this.configureOnClickRecyclerView();
-        //this.executeHttpRequestWithRetrofit(); // 5 - Execute stream after UI creationItemClickSupport
         return view;
     }
 
@@ -100,7 +92,7 @@ public class NewFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //executeHttpRequestWithRetrofit();
+
             }
         });
     }
@@ -133,7 +125,6 @@ public class NewFragment extends Fragment {
                     }
                 });
     }
-
     // -------------------
     // UPDATE UI
     // -------------------

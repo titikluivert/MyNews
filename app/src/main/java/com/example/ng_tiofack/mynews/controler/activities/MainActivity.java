@@ -1,5 +1,6 @@
 package com.example.ng_tiofack.mynews.controler.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -20,16 +22,21 @@ import com.evernote.android.job.JobRequest;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.fragments.BusinessFragment;
 import com.example.ng_tiofack.mynews.controler.fragments.MostPopularFragment;
+import com.example.ng_tiofack.mynews.controler.fragments.NewFragment;
 import com.example.ng_tiofack.mynews.controler.fragments.TopStoriesFragment;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.utils.SearchServiceStreams;
 import com.example.ng_tiofack.mynews.utils.SyncJob;
 import com.example.ng_tiofack.mynews.utils.Utils;
+import com.example.ng_tiofack.mynews.view.NewViewHolder;
 import com.example.ng_tiofack.mynews.view.ViewPagerAdapter;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import io.reactivex.observers.DisposableObserver;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -138,20 +145,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
+        String aArg;
 
         // 6 - Show fragment after user clicked on a menu item
         switch (id) {
             case R.id.menu_drawer_arts:
-                Toast.makeText(this, "Il n'y a arts", Toast.LENGTH_LONG).show();
+                aArg = "news_desk:(\"Arts\")";
+                this.executeHttpRequestWithRetrofitNews(aArg, getString(R.string.arts));
                 break;
             case R.id.menu_drawer_healthfitness:
-                Toast.makeText(this, "Il n'y a health and fitness", Toast.LENGTH_LONG).show();
+                aArg = "news_desk:(\"Health & Fitness\")";
+                this.executeHttpRequestWithRetrofitNews(aArg, getString(R.string.health_and_fitness));
                 break;
             case R.id.menu_drawer_science:
-                Toast.makeText(this, "Il n'y a science", Toast.LENGTH_LONG).show();
+                aArg = "news_desk:(\"Science\")";
+                this.executeHttpRequestWithRetrofitNews(aArg, getString(R.string.science));
                 break;
             case R.id.menu_drawer_money:
-                Toast.makeText(this, "Il n'y a money", Toast.LENGTH_LONG).show();
+                aArg = "news_desk:(\"Your Money\")";
+                this.executeHttpRequestWithRetrofitNews(aArg, getString(R.string.your_money));
                 break;
             default:
                 break;
@@ -175,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (resultCode == RESULT_OK) {
 
                 String resultString = data.getStringExtra(getString(R.string.results_from_search_activity));
-                adapter.updateFragment(2, new TopStoriesFragment(), "SEARCH");
+                adapter.updateFragment(2, NewFragment.newInstance(resultString), "SEARCH");
                 viewPager.setCurrentItem(2);
             }
             if (resultCode == RESULT_CANCELED) {
@@ -189,6 +201,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void launchNotificationActivity() {
         Intent myIntent = new Intent(MainActivity.this, NotificationsActivity.class);
         this.startActivity(myIntent);
+    }
+
+    private void executeHttpRequestWithRetrofitNews(String articles_checked, final String tabName) {
+        DisposableObserver<Search> disposable = SearchServiceStreams.streamFetchSearchItems(null, articles_checked, null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<Search>() {
+
+            @Override
+            public void onNext(Search results) {
+                if (results.getResponse().getDocs().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "no result was found", Toast.LENGTH_SHORT).show();
+                    //Snackbar.make(View., "no result was found", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                } else {
+                    String resultString = Utils.setResulttoJson(results.getResponse().getDocs());
+                    adapter.updateFragment(2, NewFragment.newInstance(resultString), tabName);
+                    viewPager.setCurrentItem(2);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("", "une erreur est survenue>" + e);
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("", "on complete is running");
+            }
+        });
     }
 
 }

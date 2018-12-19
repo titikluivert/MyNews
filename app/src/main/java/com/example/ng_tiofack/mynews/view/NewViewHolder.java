@@ -41,7 +41,5 @@ public class NewViewHolder extends RecyclerView.ViewHolder {
         this.dateText.setText(Utils.getConvertDate(news.getPubDate()));
 
         glide.load(R.drawable.newyork_time_img).apply(RequestOptions.circleCropTransform()).into(this.imageView);
-
-
     }
 }
