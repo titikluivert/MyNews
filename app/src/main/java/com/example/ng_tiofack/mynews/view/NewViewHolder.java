@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ng_tiofack.mynews.R;
-import com.example.ng_tiofack.mynews.model.Business;
+import com.example.ng_tiofack.mynews.model.Search;
 import com.example.ng_tiofack.mynews.utils.Utils;
 
 
@@ -16,9 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by NG-TIOFACK on 10/5/2018.
+ * Created by NG-TIOFACK on 12/19/2018.
  */
-public class BusinessViewHolder extends RecyclerView.ViewHolder {
+public class NewViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.fragment_item_title)
     TextView Title;
     @BindView(R.id.fragment_item_section)
@@ -29,16 +29,16 @@ public class BusinessViewHolder extends RecyclerView.ViewHolder {
     TextView dateText;
 
 
-    public BusinessViewHolder(View itemView) {
+    public NewViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithBusiness(Business.Response.Doc business, RequestManager glide) {
+    public void updateWithNews(Search.Response.Doc news, RequestManager glide) {
 
-        this.Title.setText(business.getSnippet());
-        this.texSectionSubsection.setText(business.getDocumentType());
-        this.dateText.setText(Utils.getConvertDate(business.getPubDate()));
+        this.Title.setText(news.getSnippet());
+        this.texSectionSubsection.setText(news.getDocumentType());
+        this.dateText.setText(Utils.getConvertDate(news.getPubDate()));
 
         glide.load(R.drawable.newyork_time_img).apply(RequestOptions.circleCropTransform()).into(this.imageView);
 

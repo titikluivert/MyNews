@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
@@ -103,7 +102,7 @@ public class BusinessFragment extends Fragment {
 
     // 1 - Configure item click on RecyclerView
     private void configureOnClickRecyclerView() {
-        ItemClickSupport.addTo(recyclerView, R.layout.fragment_business_item)
+        ItemClickSupport.addTo(recyclerView, R.layout.fragment_item)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -125,7 +124,6 @@ public class BusinessFragment extends Fragment {
                 // 6 - Update RecyclerView after getting results from Most Popular API
                 updateUI(results.getResponse().getDocs());
             }
-
             @Override
             public void onError(Throwable e) {
                 Log.e("", "une erreur est survenue>" + e);

@@ -100,7 +100,7 @@ public class TopStoriesFragment extends Fragment {
 
     // 1 - Configure item click on RecyclerView
     private void configureOnClickRecyclerView() {
-        ItemClickSupport.addTo(recyclerView, R.layout.fragment_business_item)
+        ItemClickSupport.addTo(recyclerView, R.layout.fragment_item)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {

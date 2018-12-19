@@ -1,15 +1,12 @@
 package com.example.ng_tiofack.mynews.controler.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,19 +16,17 @@ import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
 import com.example.ng_tiofack.mynews.model.Business;
 import com.example.ng_tiofack.mynews.model.Search;
-import com.example.ng_tiofack.mynews.utils.BusinessStreams;
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
 import com.example.ng_tiofack.mynews.view.BusinessAdapter;
+import com.example.ng_tiofack.mynews.view.NewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableObserver;
 
-public class GenericFragment extends Fragment {
+public class NewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -47,11 +42,11 @@ public class GenericFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
 
     // 2 - Declare list of results (MostPopular) & Adapter
-    private List<Business.Response.Doc> myBusinessResultsList;
-    private BusinessAdapter adapter;
-    Business.Response.Doc business_response;
+    private List<Search.Response.Doc> myResultsList;
+    private NewAdapter adapter;
+    Search.Response.Doc response;
 
-    public GenericFragment() {
+    public NewFragment() {
         // Required empty public constructor
     }
 
@@ -60,11 +55,11 @@ public class GenericFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param result Parameter 1.
-     * @return A new instance of fragment GenericFragment.
+     * @return A new instance of fragment NewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GenericFragment newInstance(String result) {
-        GenericFragment fragment = new GenericFragment();
+    public static NewFragment newInstance(String result) {
+        NewFragment fragment = new NewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, result);
       //  args.putString(ARG_PARAM2, param2);
@@ -116,9 +111,9 @@ public class GenericFragment extends Fragment {
     // 3 - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // 3.1 - Reset list
-        this.myBusinessResultsList = new ArrayList<>();
+        this.myResultsList = new ArrayList<>();
         // 3.2 - Create adapter passing the list of users
-        this.adapter = new BusinessAdapter(this.myBusinessResultsList, Glide.with(this));
+        this.adapter = new NewAdapter(this.myResultsList, Glide.with(this));
         // 3.3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items
@@ -127,13 +122,13 @@ public class GenericFragment extends Fragment {
 
     // 1 - Configure item click on RecyclerView
     private void configureOnClickRecyclerView() {
-        ItemClickSupport.addTo(recyclerView, R.layout.fragment_business_item)
+        ItemClickSupport.addTo(recyclerView, R.layout.fragment_item)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        business_response = adapter.getBusinessDoc(position);
+                        response = adapter.getBusinessDoc(position);
                         Intent myIntent = new Intent(getActivity(), WebViewActivity.class);
-                        myIntent.putExtra(getString(R.string.articleUrl), business_response.getWebUrl());
+                        myIntent.putExtra(getString(R.string.articleUrl), response.getWebUrl());
                         startActivity(myIntent);
                     }
                 });
@@ -143,11 +138,11 @@ public class GenericFragment extends Fragment {
     // UPDATE UI
     // -------------------
 
-    private void updateUI(List<Business.Response.Doc> results) {
+    private void updateUI(List<Search.Response.Doc> results) {
         // 3 - Stop refreshing and clear actual list of results
         swipeRefreshLayout.setRefreshing(false);
-        myBusinessResultsList.clear();
-        myBusinessResultsList.addAll(results);
+        myResultsList.clear();
+        myResultsList.addAll(results);
         adapter.notifyDataSetChanged();
     }
 }
