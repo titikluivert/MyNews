@@ -17,11 +17,12 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
-import com.example.ng_tiofack.mynews.utils.BusinessStreams;
+import com.example.ng_tiofack.mynews.utils.streams.BusinessStreams;
 
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
 import com.example.ng_tiofack.mynews.model.Business;
-import com.example.ng_tiofack.mynews.view.BusinessAdapter;
+import com.example.ng_tiofack.mynews.utils.Utils;
+import com.example.ng_tiofack.mynews.view.adapters.BusinessAdapter;
 
 
 import java.util.ArrayList;
@@ -118,7 +119,7 @@ public class BusinessFragment extends Fragment {
     // -------------------
 
     private void executeHttpRequestWithRetrofit() {
-        this.disposable = BusinessStreams.streamFetchBusiness("a327efabb73048adbaf8ccb2605f8d1b").subscribeWith(new DisposableObserver<Business>() {
+        this.disposable = BusinessStreams.streamFetchBusiness(Utils.apiKeyNYT).subscribeWith(new DisposableObserver<Business>() {
             @Override
             public void onNext(Business results) {
                 // 6 - Update RecyclerView after getting results from Most Popular API

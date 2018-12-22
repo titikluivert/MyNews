@@ -1,17 +1,11 @@
 package com.example.ng_tiofack.mynews.model;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.ng_tiofack.mynews.R;
-import com.example.ng_tiofack.mynews.utils.SearchServiceStreams;
-import com.irozon.sneaker.Sneaker;
 
 import java.util.List;
-
-import io.reactivex.observers.DisposableObserver;
 
 /**
  * Created by NG-TIOFACK on 11/13/2018.

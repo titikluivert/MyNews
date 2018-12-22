@@ -1,6 +1,7 @@
-package com.example.ng_tiofack.mynews.utils;
+package com.example.ng_tiofack.mynews.utils.streams;
 
 import com.example.ng_tiofack.mynews.model.Business;
+import com.example.ng_tiofack.mynews.utils.services.BusinessService;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,7 +1,9 @@
 package com.example.ng_tiofack.mynews.controler.activities;
 
-import android.content.Context;
+
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -9,12 +11,16 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.evernote.android.job.JobManager;
@@ -26,13 +32,11 @@ import com.example.ng_tiofack.mynews.controler.fragments.NewFragment;
 import com.example.ng_tiofack.mynews.controler.fragments.TopStoriesFragment;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.model.Search;
-import com.example.ng_tiofack.mynews.utils.SearchServiceStreams;
+import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
 import com.example.ng_tiofack.mynews.utils.SyncJob;
 import com.example.ng_tiofack.mynews.utils.Utils;
-import com.example.ng_tiofack.mynews.view.NewViewHolder;
-import com.example.ng_tiofack.mynews.view.ViewPagerAdapter;
+import com.example.ng_tiofack.mynews.view.adapters.ViewPagerAdapter;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -46,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private ViewPagerAdapter adapter;
     private ViewPager viewPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,10 +130,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 launchNotificationActivity();
                 return true;
             case R.id.menu_activity_main_help:
-                Toast.makeText(this, "Il n'y a rien à paramétrer ici, la fenetre help arrive...", Toast.LENGTH_LONG).show();
+                openHelp("https://www.nytimes.com");
                 return true;
             case R.id.menu_activity_main_about:
-                Toast.makeText(this, "Il n'y a rien à paramétrer ici, la fenetre about arrive...", Toast.LENGTH_LONG).show();
+                this.alertDialogAbout();
                 return true;
             default:
                 if (mToggle.onOptionsItemSelected(item)) {
@@ -145,30 +148,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
-        String aArg;
+        String aArg = null;
+        String tabName = "";
 
         // 6 - Show fragment after user clicked on a menu item
         switch (id) {
             case R.id.menu_drawer_arts:
                 aArg = "news_desk:(\"Arts\")";
-                this.executeHttpRequestWithRetrofitNews(aArg, getString(R.string.arts));
+                tabName = getString(R.string.arts);
                 break;
             case R.id.menu_drawer_healthfitness:
                 aArg = "news_desk:(\"Health & Fitness\")";
-                this.executeHttpRequestWithRetrofitNews(aArg, getString(R.string.health_and_fitness));
+                tabName = getString(R.string.health_and_fitness);
                 break;
             case R.id.menu_drawer_science:
                 aArg = "news_desk:(\"Science\")";
-                this.executeHttpRequestWithRetrofitNews(aArg, getString(R.string.science));
+                tabName = getString(R.string.science);
                 break;
             case R.id.menu_drawer_money:
                 aArg = "news_desk:(\"Your Money\")";
-                this.executeHttpRequestWithRetrofitNews(aArg, getString(R.string.your_money));
+                tabName = getString(R.string.your_money);
                 break;
             default:
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
+        this.executeHttpRequestWithRetrofitNews(aArg, tabName);
         return true;
     }
 
@@ -211,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (results.getResponse().getDocs().isEmpty()) {
                     Toast.makeText(MainActivity.this, "no result was found", Toast.LENGTH_SHORT).show();
                     //Snackbar.make(View., "no result was found", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
                 } else {
                     String resultString = Utils.setResulttoJson(results.getResponse().getDocs());
                     adapter.updateFragment(2, NewFragment.newInstance(resultString), tabName);
@@ -228,6 +234,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.e("", "on complete is running");
             }
         });
+    }
+
+    private void alertDialogAbout() {
+        final ViewGroup parent = null;
+
+        //inflate a custom view for the dialog
+        LayoutInflater layoutInflaterAndroid = LayoutInflater.from(MainActivity.this);
+        View mView = layoutInflaterAndroid.inflate(R.layout.about_alertdialog, parent, false);
+        AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(MainActivity.this);
+        alertDialogBuilderUserInput.setView(mView);
+
+        alertDialogBuilderUserInput
+                .setCancelable(false)
+                .setNeutralButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                                dialogBox.cancel();
+                            }
+                        });
+        AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+        alertDialogAndroid.show();
+    }
+
+    private void openHelp(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Please install a browser", Toast.LENGTH_LONG).show();
+        }
+
     }
 
 }

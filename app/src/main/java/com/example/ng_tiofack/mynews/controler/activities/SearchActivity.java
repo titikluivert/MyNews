@@ -3,7 +3,6 @@ package com.example.ng_tiofack.mynews.controler.activities;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,15 +18,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.ng_tiofack.mynews.R;
-import com.example.ng_tiofack.mynews.controler.fragments.BusinessFragment;
 import com.example.ng_tiofack.mynews.model.ParamsOptions;
 import com.example.ng_tiofack.mynews.model.SavedValuesParams;
 import com.example.ng_tiofack.mynews.model.Search;
-import com.example.ng_tiofack.mynews.utils.SearchServiceStreams;
+import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.irozon.sneaker.Sneaker;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

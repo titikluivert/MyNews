@@ -1,4 +1,4 @@
-package com.example.ng_tiofack.mynews.utils;
+package com.example.ng_tiofack.mynews.utils.services;
 
 import com.example.ng_tiofack.mynews.model.MostPopular;
 import com.google.gson.Gson;

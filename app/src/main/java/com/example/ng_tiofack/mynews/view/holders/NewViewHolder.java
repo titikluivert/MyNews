@@ -1,4 +1,4 @@
-package com.example.ng_tiofack.mynews.view;
+package com.example.ng_tiofack.mynews.view.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -39,7 +39,13 @@ public class NewViewHolder extends RecyclerView.ViewHolder {
         this.Title.setText(news.getSnippet());
         this.texSectionSubsection.setText(news.getDocumentType());
         this.dateText.setText(Utils.getConvertDate(news.getPubDate()));
+        if (news.getMultimedia().size() == 0) {
 
-        glide.load(R.drawable.newyork_time_img).apply(RequestOptions.circleCropTransform()).into(this.imageView);
+            glide.load(R.drawable.newyork_time_img).apply(RequestOptions.circleCropTransform()).into(imageView);
+        } else {
+
+            glide.load(news.getMultimedia().get(0).getUrl()).apply(RequestOptions.circleCropTransform()).into(imageView);
+        }
+
     }
 }

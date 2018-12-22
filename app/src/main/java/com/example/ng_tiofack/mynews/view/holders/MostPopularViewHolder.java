@@ -1,4 +1,4 @@
-package com.example.ng_tiofack.mynews.view;
+package com.example.ng_tiofack.mynews.view.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 /**
  * Created by NG-TIOFACK on 10/3/2018.
  */
-public class MostPopularViewHolder  extends RecyclerView.ViewHolder {
+public class MostPopularViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.fragment_most_popular_item_tittle)
     TextView Title;
     @BindView(R.id.fragment_most_popular_item_section)

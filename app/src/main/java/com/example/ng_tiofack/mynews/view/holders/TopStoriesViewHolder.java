@@ -1,4 +1,4 @@
-package com.example.ng_tiofack.mynews.view;
+package com.example.ng_tiofack.mynews.view.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,8 +28,6 @@ public class TopStoriesViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;
     @BindView(R.id.fragment_top_story_item_date)
     TextView dateText;
-
-
 
 
     public TopStoriesViewHolder(View itemView) {

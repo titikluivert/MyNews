@@ -17,9 +17,9 @@ import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
-import com.example.ng_tiofack.mynews.utils.MostPopularStreams;
+import com.example.ng_tiofack.mynews.utils.streams.MostPopularStreams;
 import com.example.ng_tiofack.mynews.model.MostPopular;
-import com.example.ng_tiofack.mynews.view.MostPopularAdapter;
+import com.example.ng_tiofack.mynews.view.adapters.MostPopularAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

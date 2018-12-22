@@ -54,13 +54,18 @@ public class Utils {
         String[] date_temp_1;
         String[] date_temp_2;
 
-        if (date.contains("T")) {
-            date_temp_1 = date.split("T");
-            date_temp_2 = date_temp_1[0].split("-");
-        } else {
-            date_temp_2 = date.split("-");
+        if (date == null){
+            convertDate = "01/01/1970";
         }
-        convertDate = date_temp_2[2] + "/" + date_temp_2[1] + "/" + date_temp_2[0];
+        else {
+            if (date.contains("T")) {
+                date_temp_1 = date.split("T");
+                date_temp_2 = date_temp_1[0].split("-");
+            } else {
+                date_temp_2 = date.split("-");
+            }
+            convertDate = date_temp_2[2] + "/" + date_temp_2[1] + "/" + date_temp_2[0];
+        }
         return convertDate;
     }
 

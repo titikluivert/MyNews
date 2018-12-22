@@ -1,4 +1,4 @@
-package com.example.ng_tiofack.mynews.view;
+package com.example.ng_tiofack.mynews.view.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

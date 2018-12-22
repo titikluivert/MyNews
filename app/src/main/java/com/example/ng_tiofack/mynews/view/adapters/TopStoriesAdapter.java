@@ -1,4 +1,4 @@
-package com.example.ng_tiofack.mynews.view;
+package com.example.ng_tiofack.mynews.view.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.RequestManager;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.TopStories;
+import com.example.ng_tiofack.mynews.view.holders.TopStoriesViewHolder;
 
 import java.util.List;
 

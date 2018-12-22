@@ -1,7 +1,6 @@
-package com.example.ng_tiofack.mynews.utils;
+package com.example.ng_tiofack.mynews.utils.services;
 
 import com.example.ng_tiofack.mynews.model.Business;
-import com.example.ng_tiofack.mynews.model.Search;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -13,9 +12,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Created by NG-TIOFACK on 10/31/2018.
+ * Created by NG-TIOFACK on 9/27/2018.
  */
-public interface SearchService {
+public interface BusinessService {
 
 
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -23,15 +22,7 @@ public interface SearchService {
             .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
 
     @GET("articlesearch.json")
-    Observable<Search> getSearchItems(
-
-            @Query("q") String query_item,
-            @Query(value = "fq", encoded = true) String articleChecked,
-            @Query("begin_date") String dateCombinedBegin,
-            @Query("end_date") String dateCombinedEnd,
-            @Query("api_key") String api_key
-
-    );
+    Observable<Business> getapiKeyBusiness(@Query("api-key") String api_key);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/search/v2/")
@@ -39,5 +30,4 @@ public interface SearchService {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(client.build())
             .build();
-
 }

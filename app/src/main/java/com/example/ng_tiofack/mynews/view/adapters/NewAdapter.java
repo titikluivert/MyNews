@@ -1,4 +1,4 @@
-package com.example.ng_tiofack.mynews.view;
+package com.example.ng_tiofack.mynews.view.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.RequestManager;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.view.holders.NewViewHolder;
 
 import java.util.List;
 
@@ -29,6 +30,11 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> {
     public NewAdapter(List<Search.Response.Doc> mostBusinessDocsList, RequestManager glide) {
         this.myDocsList = mostBusinessDocsList;
         this.glide = glide;
+    }
+
+    public void setDocList( List<Search.Response.Doc> list) {
+        this.myDocsList = list;
+        this.notifyDataSetChanged();
     }
 
     @NonNull

@@ -33,6 +33,5 @@ public class App extends Application {
         }
 
         JobManager.create(this).addJobCreator(new ReminderJobCreator());
-        //JobConfig.setAllowSmallerIntervalsForMarshmallow(true);
     }
 }

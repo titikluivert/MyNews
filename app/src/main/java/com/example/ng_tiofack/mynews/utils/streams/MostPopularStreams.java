@@ -1,6 +1,8 @@
-package com.example.ng_tiofack.mynews.utils;
+package com.example.ng_tiofack.mynews.utils.streams;
 
 import com.example.ng_tiofack.mynews.model.MostPopular;
+import com.example.ng_tiofack.mynews.utils.services.MostPopularService;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;

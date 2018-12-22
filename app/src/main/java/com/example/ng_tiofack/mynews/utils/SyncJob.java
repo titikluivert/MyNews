@@ -16,6 +16,7 @@ import com.example.ng_tiofack.mynews.model.ParamsOptions;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.model.SavedValuesParams;
 import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,6 @@ import io.reactivex.observers.DisposableObserver;
 public class SyncJob extends Job {
 
     public static final String TAG = "demo_tag";
-    private DisposableObserver<Search> disposable;
 
     @Override
     @NonNull
@@ -37,28 +37,28 @@ public class SyncJob extends Job {
         List<String> articles = new ArrayList<>();
         SavedValues mySavedValues = Utils.getNotificationParam(this.getContext());
         SavedValuesParams savedValuesParams = paramsOptions.checkParamsOptions(this.getContext(), mySavedValues.getqueryItem(), null, null, mySavedValues.getCategories(), articles);
-        disposable = SearchServiceStreams.streamFetchSearchItems(mySavedValues.getqueryItem(), savedValuesParams.getArticleschecked(), null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<Search>() {
+        DisposableObserver<Search> disposable = SearchServiceStreams.streamFetchSearchItems(mySavedValues.getqueryItem(), savedValuesParams.getArticleschecked(), null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<Search>() {
 
             @Override
             public void onNext(Search results) {
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        NotificationChannel channel = new NotificationChannel(TAG, "Job Notification", NotificationManager.IMPORTANCE_HIGH);
-                        channel.setDescription("Job notification");
-                        Objects.requireNonNull(getContext().getSystemService(NotificationManager.class)).createNotificationChannel(channel);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel channel = new NotificationChannel(TAG, "Job Notification", NotificationManager.IMPORTANCE_HIGH);
+                    channel.setDescription("Job notification");
+                    Objects.requireNonNull(getContext().getSystemService(NotificationManager.class)).createNotificationChannel(channel);
 
-                    }
+                }
 
-                    Notification notification = new NotificationCompat.Builder(getContext(), TAG)
-                            .setContentTitle("New notifications")
-                            .setContentText(getContext().getString(R.string.notificationTitle, results.getResponse().getDocs().size()))
-                            .setPriority(NotificationCompat.PRIORITY_HIGH)
-                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                            .setSmallIcon(R.drawable.ic_notifications_active_black_24dp)
-                            .setColor(Color.GRAY)
-                            .build();
+                Notification notification = new NotificationCompat.Builder(getContext(), TAG)
+                        .setContentTitle("New notifications")
+                        .setContentText(getContext().getString(R.string.notificationTitle, results.getResponse().getDocs().size()))
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                        .setSmallIcon(R.drawable.ic_notifications_active_black_24dp)
+                        .setColor(Color.GRAY)
+                        .build();
 
-                    NotificationManagerCompat.from(getContext()).notify(1, notification);
+                NotificationManagerCompat.from(getContext()).notify(1, notification);
 
 
             }

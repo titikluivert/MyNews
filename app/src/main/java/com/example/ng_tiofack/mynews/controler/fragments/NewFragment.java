@@ -10,13 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
 import com.example.ng_tiofack.mynews.model.Search;
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
 import com.example.ng_tiofack.mynews.utils.Utils;
-import com.example.ng_tiofack.mynews.view.NewAdapter;
+import com.example.ng_tiofack.mynews.view.adapters.NewAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +29,8 @@ public class NewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    //private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String result;
-   @BindView(R.id.fragment_news_recycler_view)
-   RecyclerView recyclerView; // 1 - Declare RecyclerView
+    @BindView(R.id.fragment_news_recycler_view)
+    RecyclerView recyclerView; // 1 - Declare RecyclerView
 
     // 1 - Declare the SwipeRefreshLayout
     @BindView(R.id.fragment_news_swipe_container)
@@ -42,6 +40,7 @@ public class NewFragment extends Fragment {
     private List<Search.Response.Doc> myResultsList;
     private NewAdapter adapter;
     private Search.Response.Doc response;
+
 
     public NewFragment() {
         // Required empty public constructor
@@ -63,24 +62,30 @@ public class NewFragment extends Fragment {
         return fragment;
     }
 
-    @Override
+    /*@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             result = getArguments().getString(ARG_PARAM1);
-            updateUI(Utils.getResultfromJson(result));
         }
-    }
+    }*/
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_business, container, false);
+        View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
         this.configureRecyclerView(); // - 3 Call during UI creation
         this.configureSwipeRefreshLayout();  // 4 - Configure the SwipeRefreshLayout
         this.configureOnClickRecyclerView();
+        if (getArguments() != null) {
+            //private static final String ARG_PARAM2 = "param2";
+            String result = getArguments().getString(ARG_PARAM1);
+            this.executeHttpRequestWithRetrofitNews(result);
+        }
+
         return view;
     }
+
 
     @Override
     public void onDestroy() {
@@ -126,15 +131,24 @@ public class NewFragment extends Fragment {
                 });
     }
     // -------------------
-    // UPDATE UI
+    // HTTP (RxJAVA)
     // -------------------
+
+    private void executeHttpRequestWithRetrofitNews(String articles_checked) {
+
+        List<Search.Response.Doc> resp = Utils.getResultfromJson(articles_checked);
+        updateUI(resp);
+
+    }
+
 
     private void updateUI(List<Search.Response.Doc> results) {
         // 3 - Stop refreshing and clear actual list of results
         swipeRefreshLayout.setRefreshing(false);
         myResultsList.clear();
         myResultsList.addAll(results);
-        adapter.notifyDataSetChanged();
+        adapter.setDocList(myResultsList);
+        //adapter.notifyDataSetChanged();
     }
 }
 
