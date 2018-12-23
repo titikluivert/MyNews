@@ -1,6 +1,4 @@
 package com.example.ng_tiofack.mynews.controler.activities;
-
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobRequest;
 import com.example.ng_tiofack.mynews.R;
@@ -36,10 +33,8 @@ import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
 import com.example.ng_tiofack.mynews.utils.SyncJob;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.view.adapters.ViewPagerAdapter;
-
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
 import io.reactivex.observers.DisposableObserver;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -175,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.executeHttpRequestWithRetrofitNews(aArg, tabName);
         return true;
     }
-
     // ----
     private void launchSearchActivity() {
         Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
