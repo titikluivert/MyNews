@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int schedulePeriodicJob() {
 
         return new JobRequest.Builder(SyncJob.TAG)
-
                 .setPeriodic(TimeUnit.DAYS.toMillis(1))
                 .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
                 .build()

@@ -16,7 +16,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        if (BuildConfig.DEBUG) {
+        /*if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(
                     new StrictMode.ThreadPolicy.Builder()
                             .detectAll()
@@ -30,7 +30,7 @@ public class App extends Application {
                             .penaltyLog()
                             .penaltyDeath()
                             .build());
-        }
+        }*/
 
         JobManager.create(this).addJobCreator(new ReminderJobCreator());
     }

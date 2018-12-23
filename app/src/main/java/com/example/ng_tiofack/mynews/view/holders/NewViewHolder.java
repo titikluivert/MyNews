@@ -28,7 +28,6 @@ public class NewViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.fragment_item_date)
     TextView dateText;
 
-
     public NewViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -39,13 +38,24 @@ public class NewViewHolder extends RecyclerView.ViewHolder {
         this.Title.setText(news.getSnippet());
         this.texSectionSubsection.setText(news.getDocumentType());
         this.dateText.setText(Utils.getConvertDate(news.getPubDate()));
-        if (news.getMultimedia().size() == 0) {
 
-            glide.load(R.drawable.newyork_time_img).apply(RequestOptions.circleCropTransform()).into(imageView);
-        } else {
+        switch (news.getNewsDesk()) {
 
-            glide.load(news.getMultimedia().get(0).getUrl()).apply(RequestOptions.circleCropTransform()).into(imageView);
+            case "Arts":
+                glide.load(R.drawable.artlogo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                break;
+            case "Health & Fitness":
+                glide.load(R.drawable.healthfitnesslogo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                break;
+            case "Science":
+                glide.load(R.drawable.sciencelogo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                break;
+            case "Your Money":
+                glide.load(R.drawable.yourmoneylogo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                break;
+            default:
+                glide.load(R.drawable.file_search).apply(RequestOptions.circleCropTransform()).into(imageView);
+                break;
         }
-
     }
 }

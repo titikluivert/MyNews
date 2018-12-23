@@ -1,6 +1,5 @@
 package com.example.ng_tiofack.mynews.controler.fragments;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -23,7 +22,6 @@ import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
 import com.example.ng_tiofack.mynews.model.Business;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.view.adapters.BusinessAdapter;
-
 
 import java.util.ArrayList;
 import java.util.List;
