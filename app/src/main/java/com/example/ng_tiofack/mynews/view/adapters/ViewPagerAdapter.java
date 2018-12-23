@@ -1,5 +1,6 @@
 package com.example.ng_tiofack.mynews.view.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,6 +23,17 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return mFragmentList.get(position);
+    }
+
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return FragmentPagerAdapter.POSITION_NONE;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return mFragmentListTitles.get(position).hashCode();
     }
 
     @Override

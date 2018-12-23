@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return new JobRequest.Builder(SyncJob.TAG)
                 .setPeriodic(TimeUnit.DAYS.toMillis(1))
+                .setUpdateCurrent(true)
                 .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
                 .build()
                 .schedule();
