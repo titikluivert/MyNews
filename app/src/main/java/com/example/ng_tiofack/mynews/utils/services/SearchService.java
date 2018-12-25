@@ -1,6 +1,6 @@
 package com.example.ng_tiofack.mynews.utils.services;
 
-import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -22,7 +22,7 @@ public interface SearchService {
             .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
 
     @GET("articlesearch.json")
-    Observable<Search> getSearchItems(
+    Observable<ArticlesNews> getSearchItems(
 
             @Query("q") String query_item,
             @Query(value = "fq", encoded = true) String articleChecked,

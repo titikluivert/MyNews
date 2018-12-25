@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 
-public class Search {
+public class ArticlesNews {
 
     @SerializedName("status")
     @Expose

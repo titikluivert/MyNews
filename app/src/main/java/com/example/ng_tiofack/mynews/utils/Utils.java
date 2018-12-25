@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.SavedValues;
-import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -70,16 +70,16 @@ public class Utils {
     }
 
 
-    public static String setResulttoJson(List<Search.Response.Doc> business_response) {
+    public static String setResulttoJson(List<ArticlesNews.Response.Doc> business_response) {
 
         Gson gson = new Gson();
         return gson.toJson(business_response);
     }
 
-    public static List<Search.Response.Doc> getResultfromJson(String myJsonString) {
+    public static List<ArticlesNews.Response.Doc> getResultfromJson(String myJsonString) {
 
         Gson gson = new Gson();
-        Type type = new TypeToken<List<Search.Response.Doc>>() {
+        Type type = new TypeToken<List<ArticlesNews.Response.Doc>>() {
         }.getType();
         return gson.fromJson(myJsonString, type);
 

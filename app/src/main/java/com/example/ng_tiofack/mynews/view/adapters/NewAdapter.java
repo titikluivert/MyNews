@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.RequestManager;
 import com.example.ng_tiofack.mynews.R;
-import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.view.holders.NewViewHolder;
 
 import java.util.List;
@@ -22,17 +22,17 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> {
 // FOR DATA
 
 
-    private List<Search.Response.Doc> myDocsList;
+    private List<ArticlesNews.Response.Doc> myDocsList;
     // 1 - Declaring a Glide object
     private RequestManager glide;
 
     // 2 - Updating our constructor adding a Glide Object
-    public NewAdapter(List<Search.Response.Doc> mostBusinessDocsList, RequestManager glide) {
+    public NewAdapter(List<ArticlesNews.Response.Doc> mostBusinessDocsList, RequestManager glide) {
         this.myDocsList = mostBusinessDocsList;
         this.glide = glide;
     }
 
-    public void setDocList( List<Search.Response.Doc> list) {
+    public void setDocList( List<ArticlesNews.Response.Doc> list) {
         this.myDocsList = list;
         this.notifyDataSetChanged();
     }
@@ -62,7 +62,7 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> {
         return this.myDocsList.size();
     }
 
-    public Search.Response.Doc getBusinessDoc(int position){
+    public ArticlesNews.Response.Doc getBusinessDoc(int position){
         return this.myDocsList.get(position);
     }
 }

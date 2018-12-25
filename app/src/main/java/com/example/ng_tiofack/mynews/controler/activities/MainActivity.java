@@ -28,7 +28,7 @@ import com.example.ng_tiofack.mynews.controler.fragments.MostPopularFragment;
 import com.example.ng_tiofack.mynews.controler.fragments.NewFragment;
 import com.example.ng_tiofack.mynews.controler.fragments.TopStoriesFragment;
 import com.example.ng_tiofack.mynews.model.SavedValues;
-import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
 import com.example.ng_tiofack.mynews.utils.SyncJob;
 import com.example.ng_tiofack.mynews.utils.Utils;
@@ -203,10 +203,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void executeHttpRequestWithRetrofitNews(String articles_checked, final String tabName) {
-        DisposableObserver<Search> disposable = SearchServiceStreams.streamFetchSearchItems(null, articles_checked, null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<Search>() {
+        DisposableObserver<ArticlesNews> disposable = SearchServiceStreams.streamFetchSearchItems(null, articles_checked, null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
 
             @Override
-            public void onNext(Search results) {
+            public void onNext(ArticlesNews results) {
                 if (results.getResponse().getDocs().isEmpty()) {
                     Toast.makeText(MainActivity.this, "no result was found", Toast.LENGTH_SHORT).show();
                     //Snackbar.make(View., "no result was found", Snackbar.LENGTH_LONG).setAction("Action", null).show();

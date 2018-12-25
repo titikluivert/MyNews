@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ng_tiofack.mynews.R;
-import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.Utils;
 
 
@@ -33,7 +33,7 @@ public class NewViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithNews(Search.Response.Doc news, RequestManager glide) {
+    public void updateWithNews(ArticlesNews.Response.Doc news, RequestManager glide) {
 
         this.Title.setText(news.getSnippet());
         this.texSectionSubsection.setText(news.getDocumentType());

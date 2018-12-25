@@ -66,7 +66,7 @@ public class TopStoriesFragment extends Fragment {
         this.configureRecyclerView(); // - 3 Call during UI creation
         this.configureSwipeRefreshLayout();  // 4 - Configure the SwipeRefreshLayout
         this.configureOnClickRecyclerView();
-        this.executeHttpRequestWithRetrofit(); // 5 - Execute stream after UI creation
+        this.executeHttpRequestWithRetrofitTopStories(); // 5 - Execute stream after UI creation
         return view;
     }
 
@@ -81,7 +81,7 @@ public class TopStoriesFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                executeHttpRequestWithRetrofit();
+                executeHttpRequestWithRetrofitTopStories();
             }
         });
     }
@@ -115,12 +115,11 @@ public class TopStoriesFragment extends Fragment {
     // HTTP (RxJAVA)
     // -------------------
 
-    private void executeHttpRequestWithRetrofit() {
+    private void executeHttpRequestWithRetrofitTopStories() {
         this.disposable = TopStoriesStreams.streamFetchTopStories("a327efabb73048adbaf8ccb2605f8d1b").subscribeWith(new DisposableObserver<TopStories>() {
             @Override
             public void onNext(TopStories results) {
                 // 6 - Update RecyclerView after getting results from Top Stories API
-                Log.e("","ready to update");
                 updateUI(results.getResults());
             }
 
@@ -131,7 +130,7 @@ public class TopStoriesFragment extends Fragment {
 
             @Override
             public void onComplete() {
-                Log.e("","Termine avec ou sans succes");
+                Log.e("","ends with or without success");
             }
         });
     }

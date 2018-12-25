@@ -35,6 +35,9 @@
     <string name="open_classroom_projet_5">Open Classroom projet 5</string>
     <string name="c_2018">c. 2018</string>
     <string name="webview_title">Articles</string>
+    <string name="search_articles">Search Articles</string>
+    <string name="news_desk_business">news_desk:(\"Business\")</string>
+    <string name="error_msg_rxjava">an error occurred</string>
 
     <string-array name="topicArray">
 

@@ -1,6 +1,6 @@
 package com.example.ng_tiofack.mynews.utils.streams;
 
-import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.services.SearchService;
 
 import java.util.concurrent.TimeUnit;
@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers;
 public class SearchServiceStreams {
 
 
-    public static Observable<Search> streamFetchSearchItems(String query_item, String articlescheked, String begin_date, String end_date, String key) {
+    public static Observable<ArticlesNews> streamFetchSearchItems(String query_item, String articlescheked, String begin_date, String end_date, String key) {
         SearchService searchService= SearchService.retrofit.create(SearchService.class);
         return searchService.getSearchItems(query_item, articlescheked, begin_date, end_date, key)
                 .subscribeOn(Schedulers.io())

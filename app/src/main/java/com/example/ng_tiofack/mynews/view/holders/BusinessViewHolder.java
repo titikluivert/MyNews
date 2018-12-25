@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ng_tiofack.mynews.R;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.model.Business;
 import com.example.ng_tiofack.mynews.utils.Utils;
 
@@ -34,14 +35,22 @@ public class BusinessViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithBusiness(Business.Response.Doc business, RequestManager glide) {
+    public void updateWithBusiness(ArticlesNews.Response.Doc business, RequestManager glide) {
 
         this.Title.setText(business.getSnippet());
         this.texSectionSubsection.setText(business.getDocumentType());
         this.dateText.setText(Utils.getConvertDate(business.getPubDate()));
 
-        glide.load(R.drawable.newyork_time_img).apply(RequestOptions.circleCropTransform()).into(this.imageView);
+        switch (business.getNewsDesk()) {
 
+            case "Business":
+                glide.load(R.drawable.business_logo).apply(RequestOptions.circleCropTransform()).into(this.imageView);
+
+                break;
+            default:
+                glide.load(R.drawable.newyork_time_img).apply(RequestOptions.circleCropTransform()).into(this.imageView);
+                break;
+        }
 
     }
 }

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.streams.BusinessStreams;
 
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
@@ -48,9 +49,9 @@ public class BusinessFragment extends Fragment {
     //FOR DATA
     private Disposable disposable;
     // 2 - Declare list of results (MostPopular) & Adapter
-    private List<Business.Response.Doc> myBusinessResultsList;
+    private List<ArticlesNews.Response.Doc> myBusinessResultsList;
     private BusinessAdapter adapter;
-    Business.Response.Doc business_response;
+    ArticlesNews.Response.Doc business_response;
 
     public BusinessFragment() {
         // Required empty public constructor
@@ -117,15 +118,15 @@ public class BusinessFragment extends Fragment {
     // -------------------
 
     private void executeHttpRequestWithRetrofit() {
-        this.disposable = BusinessStreams.streamFetchBusiness(Utils.apiKeyNYT).subscribeWith(new DisposableObserver<Business>() {
+        this.disposable = BusinessStreams.streamFetchBusiness(getString(R.string.news_desk_business), Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
             @Override
-            public void onNext(Business results) {
+            public void onNext(ArticlesNews results) {
                 // 6 - Update RecyclerView after getting results from Most Popular API
                 updateUI(results.getResponse().getDocs());
             }
             @Override
             public void onError(Throwable e) {
-                Log.e("", "une erreur est survenue>" + e);
+                Log.e("", getString(R.string.error_msg_rxjava) + e);
             }
 
             @Override
@@ -143,7 +144,7 @@ public class BusinessFragment extends Fragment {
     // UPDATE UI
     // -------------------
 
-    private void updateUI(List<Business.Response.Doc> results) {
+    private void updateUI(List<ArticlesNews.Response.Doc> results) {
         // 3 - Stop refreshing and clear actual list of results
         swipeRefreshLayout.setRefreshing(false);
         myBusinessResultsList.clear();

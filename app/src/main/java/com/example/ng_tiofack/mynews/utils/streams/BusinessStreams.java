@@ -1,6 +1,6 @@
 package com.example.ng_tiofack.mynews.utils.streams;
 
-import com.example.ng_tiofack.mynews.model.Business;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.services.BusinessService;
 
 import java.util.concurrent.TimeUnit;
@@ -14,13 +14,12 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class BusinessStreams {
 
-   public static Observable<Business> streamFetchBusiness(String apikey) {
+   public static Observable<ArticlesNews> streamFetchBusiness(String newDeskBusiness, String apikey) {
         BusinessService businessService = BusinessService.retrofit.create(BusinessService.class);
-        return businessService.getapiKeyBusiness(apikey)
+        return businessService.getapiKeyBusiness(newDeskBusiness,apikey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
-
 
                 }
 }

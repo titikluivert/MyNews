@@ -1,6 +1,6 @@
 package com.example.ng_tiofack.mynews.utils.services;
 
-import com.example.ng_tiofack.mynews.model.Business;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -22,7 +22,10 @@ public interface BusinessService {
             .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
 
     @GET("articlesearch.json")
-    Observable<Business> getapiKeyBusiness(@Query("api-key") String api_key);
+    Observable<ArticlesNews> getapiKeyBusiness(
+            @Query(value = "fq", encoded = true) String articleChecked,
+            @Query("api-key") String api_key
+    );
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/search/v2/")

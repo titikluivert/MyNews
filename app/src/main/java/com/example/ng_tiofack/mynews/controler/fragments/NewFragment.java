@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
-import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.view.adapters.NewAdapter;
@@ -37,9 +37,9 @@ public class NewFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
 
     // 2 - Declare list of results (MostPopular) & Adapter
-    private List<Search.Response.Doc> myResultsList;
+    private List<ArticlesNews.Response.Doc> myResultsList;
     private NewAdapter adapter;
-    private Search.Response.Doc response;
+    private ArticlesNews.Response.Doc response;
 
 
     public NewFragment() {
@@ -136,13 +136,13 @@ public class NewFragment extends Fragment {
 
     private void executeHttpRequestWithRetrofitNews(String articles_checked) {
 
-        List<Search.Response.Doc> resp = Utils.getResultfromJson(articles_checked);
+        List<ArticlesNews.Response.Doc> resp = Utils.getResultfromJson(articles_checked);
         updateUI(resp);
 
     }
 
 
-    private void updateUI(List<Search.Response.Doc> results) {
+    private void updateUI(List<ArticlesNews.Response.Doc> results) {
         // 3 - Stop refreshing and clear actual list of results
         swipeRefreshLayout.setRefreshing(false);
         myResultsList.clear();

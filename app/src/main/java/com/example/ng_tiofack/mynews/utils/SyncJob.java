@@ -15,7 +15,7 @@ import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.ParamsOptions;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.model.SavedValuesParams;
-import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
 
 import java.util.ArrayList;
@@ -37,10 +37,10 @@ public class SyncJob extends Job {
         List<String> articles = new ArrayList<>();
         SavedValues mySavedValues = Utils.getNotificationParam(this.getContext());
         SavedValuesParams savedValuesParams = paramsOptions.checkParamsOptions(this.getContext(), mySavedValues.getqueryItem(), null, null, mySavedValues.getCategories(), articles);
-        DisposableObserver<Search> disposable = SearchServiceStreams.streamFetchSearchItems(mySavedValues.getqueryItem(), savedValuesParams.getArticleschecked(), null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<Search>() {
+        DisposableObserver<ArticlesNews> disposable = SearchServiceStreams.streamFetchSearchItems(mySavedValues.getqueryItem(), savedValuesParams.getArticleschecked(), null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
 
             @Override
-            public void onNext(Search results) {
+            public void onNext(ArticlesNews results) {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     NotificationChannel channel = new NotificationChannel(TAG, "Job Notification", NotificationManager.IMPORTANCE_HIGH);

@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.ParamsOptions;
 import com.example.ng_tiofack.mynews.model.SavedValuesParams;
-import com.example.ng_tiofack.mynews.model.Search;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.irozon.sneaker.Sneaker;
@@ -178,10 +178,10 @@ public class SearchActivity extends AppCompatActivity  {
     }
 
     private void executeHttpRequestWithRetrofit(final Context ctx, String query_item, String articles_checked, String begin_date, String end_date, String key) {
-        DisposableObserver<Search> disposable = SearchServiceStreams.streamFetchSearchItems(query_item, articles_checked, begin_date, end_date, key).subscribeWith(new DisposableObserver<Search>() {
+        DisposableObserver<ArticlesNews> disposable = SearchServiceStreams.streamFetchSearchItems(query_item, articles_checked, begin_date, end_date, key).subscribeWith(new DisposableObserver<ArticlesNews>() {
 
             @Override
-            public void onNext(Search results) {
+            public void onNext(ArticlesNews results) {
                 if (results.getResponse().getDocs().isEmpty()) {
                     //Toast.makeText(ctx, "no result was found", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_CANCELED);
