@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
+import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.utils.streams.MostPopularStreams;
 import com.example.ng_tiofack.mynews.model.MostPopular;
 import com.example.ng_tiofack.mynews.view.adapters.MostPopularAdapter;
@@ -112,7 +113,7 @@ public class MostPopularFragment extends Fragment {
     // -------------------
 
     private void executeHttpRequestWithRetrofit() {
-        this.disposable = MostPopularStreams.streamFetchMostPopular("a327efabb73048adbaf8ccb2605f8d1b").subscribeWith(new DisposableObserver<MostPopular>() {
+        this.disposable = MostPopularStreams.streamFetchMostPopular(Utils.apiKeyNYT).subscribeWith(new DisposableObserver<MostPopular>() {
             @Override
             public void onNext(MostPopular results) {
                 // 6 - Update RecyclerView after getting results from Most Popular API

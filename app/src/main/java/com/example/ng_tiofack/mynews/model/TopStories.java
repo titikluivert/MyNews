@@ -11,7 +11,7 @@ public class TopStories {
 
     @SerializedName("status")
     @Expose
-private String status;      
+    private String status;
     @SerializedName("copyright")
     @Expose
     private String copyright;

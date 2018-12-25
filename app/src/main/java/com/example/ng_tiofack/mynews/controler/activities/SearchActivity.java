@@ -33,20 +33,8 @@ import java.util.Objects;
 import io.reactivex.observers.DisposableObserver;
 
 
-public class SearchActivity extends AppCompatActivity  {
+public class SearchActivity extends AppCompatActivity {
 
-    /*
-    Solution 1:
-    Modifier SearchActivity pour qu'il prenne 2 fragments:
-    - Un fragment pour afficher les éléments de la recherche
-    - Un fragment pour afficher les résultats
-    On bascule d'un fragment à un autre grâce à getSupportFragmentManager (et les transactions via replace)
-
-    Soltuion 2:
-    MainActivity lance SearchActivity avec startActivityForResult
-    Quand SearchActivity à récupéré les résultats de la recherche elle renvoie les articles trouvés à MainActivity
-    MainActivity se charge de faire l'affichage
-     */
 
     private DatePickerDialog mDatePickerDialog;
     private Calendar calendar;
@@ -182,6 +170,7 @@ public class SearchActivity extends AppCompatActivity  {
 
             @Override
             public void onNext(ArticlesNews results) {
+                Utils.onFetchDataSuccess(results);
                 if (results.getResponse().getDocs().isEmpty()) {
                     //Toast.makeText(ctx, "no result was found", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_CANCELED);

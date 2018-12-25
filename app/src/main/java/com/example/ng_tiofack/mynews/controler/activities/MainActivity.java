@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -103,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return new JobRequest.Builder(SyncJob.TAG)
                 .setPeriodic(TimeUnit.DAYS.toMillis(1))
-                .setUpdateCurrent(true)
                 .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
                 .build()
                 .schedule();
@@ -190,8 +190,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 viewPager.setCurrentItem(2);
             }
             if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "no result was found", Toast.LENGTH_SHORT).show();
-                //Snackbar.make(View., "no result was found", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Snackbar.make(getWindow().getDecorView().getRootView(), R.string.no_result_search, Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
 
         }
@@ -208,8 +207,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onNext(ArticlesNews results) {
                 if (results.getResponse().getDocs().isEmpty()) {
-                    Toast.makeText(MainActivity.this, "no result was found", Toast.LENGTH_SHORT).show();
-                    //Snackbar.make(View., "no result was found", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    Snackbar.make(getWindow().getDecorView().getRootView(), R.string.no_result_search, Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
                 } else {
                     String resultString = Utils.setResulttoJson(results.getResponse().getDocs());
@@ -220,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onError(Throwable e) {
-                Log.e("", "une erreur est survenue>" + e);
+                Log.e("", getString(R.string.error_msg_rxjava) + e);
             }
 
             @Override
@@ -256,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Please install a browser", Toast.LENGTH_LONG).show();
+            Snackbar.make(getWindow().getDecorView().getRootView(), R.string.browser_required, Snackbar.LENGTH_LONG).setAction("Action", null).show();
         }
 
     }

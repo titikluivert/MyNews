@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.bumptech.glide.RequestManager;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.ArticlesNews;
-import com.example.ng_tiofack.mynews.model.Business;
 import com.example.ng_tiofack.mynews.view.holders.BusinessViewHolder;
 
 import java.util.List;

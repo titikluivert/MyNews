@@ -62,23 +62,13 @@ public class NewFragment extends Fragment {
         return fragment;
     }
 
-    /*@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            result = getArguments().getString(ARG_PARAM1);
-        }
-    }*/
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
         this.configureRecyclerView(); // - 3 Call during UI creation
-        this.configureSwipeRefreshLayout();  // 4 - Configure the SwipeRefreshLayout
         this.configureOnClickRecyclerView();
         if (getArguments() != null) {
-            //private static final String ARG_PARAM2 = "param2";
             String result = getArguments().getString(ARG_PARAM1);
             this.executeHttpRequestWithRetrofitNews(result);
         }
@@ -86,21 +76,11 @@ public class NewFragment extends Fragment {
         return view;
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
 
-    // 2 - Configure the SwipeRefreshLayout
-    private void configureSwipeRefreshLayout() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-        });
-    }
     // -----------------
     // CONFIGURATION
     // -----------------
@@ -130,9 +110,6 @@ public class NewFragment extends Fragment {
                     }
                 });
     }
-    // -------------------
-    // HTTP (RxJAVA)
-    // -------------------
 
     private void executeHttpRequestWithRetrofitNews(String articles_checked) {
 
@@ -141,14 +118,12 @@ public class NewFragment extends Fragment {
 
     }
 
-
     private void updateUI(List<ArticlesNews.Response.Doc> results) {
         // 3 - Stop refreshing and clear actual list of results
         swipeRefreshLayout.setRefreshing(false);
         myResultsList.clear();
         myResultsList.addAll(results);
         adapter.setDocList(myResultsList);
-        //adapter.notifyDataSetChanged();
     }
 }
 

@@ -38,6 +38,8 @@
     <string name="search_articles">Search Articles</string>
     <string name="news_desk_business">news_desk:(\"Business\")</string>
     <string name="error_msg_rxjava">an error occurred</string>
+    <string name="browser_required">Please install a browser</string>
+    <string name="no_result_search">no result was found</string>
 
     <string-array name="topicArray">
 

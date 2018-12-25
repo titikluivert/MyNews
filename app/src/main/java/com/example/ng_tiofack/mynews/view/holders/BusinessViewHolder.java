@@ -9,7 +9,6 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.ArticlesNews;
-import com.example.ng_tiofack.mynews.model.Business;
 import com.example.ng_tiofack.mynews.utils.Utils;
 
 

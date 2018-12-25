@@ -3,6 +3,7 @@ package com.example.ng_tiofack.mynews.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.model.ArticlesNews;
@@ -39,7 +40,7 @@ public class Utils {
         String json = sharedPreferences.getString(context.getString(R.string.save_categories__key), null);
         Type type = new TypeToken<boolean[]>() {
         }.getType();
-        boolean [] categories= gson.fromJson(json, type);
+        boolean[] categories = gson.fromJson(json, type);
 
         return new SavedValues(
 
@@ -54,10 +55,9 @@ public class Utils {
         String[] date_temp_1;
         String[] date_temp_2;
 
-        if (date == null){
+        if (date == null) {
             convertDate = "01/01/1970";
-        }
-        else {
+        } else {
             if (date.contains("T")) {
                 date_temp_1 = date.split("T");
                 date_temp_2 = date_temp_1[0].split("-");
@@ -84,5 +84,23 @@ public class Utils {
         return gson.fromJson(myJsonString, type);
 
     }
+
+
+    void onFetchDataStarted() {
+
+    }
+
+    void onFetchDataCompleted() {
+
+    }
+
+    public static Object onFetchDataSuccess(Object object) {
+        return object;
+    }
+
+    void onFetchDataError(Throwable e) {
+
+    }
+
 
 }

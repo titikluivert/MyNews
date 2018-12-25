@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
+import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.utils.streams.TopStoriesStreams;
 import com.example.ng_tiofack.mynews.model.TopStories;
 import com.example.ng_tiofack.mynews.view.adapters.TopStoriesAdapter;
@@ -115,8 +116,8 @@ public class TopStoriesFragment extends Fragment {
     // HTTP (RxJAVA)
     // -------------------
 
-    private void executeHttpRequestWithRetrofitTopStories() {
-        this.disposable = TopStoriesStreams.streamFetchTopStories("a327efabb73048adbaf8ccb2605f8d1b").subscribeWith(new DisposableObserver<TopStories>() {
+    public void executeHttpRequestWithRetrofitTopStories() {
+        this.disposable = TopStoriesStreams.streamFetchTopStories(Utils.apiKeyNYT).subscribeWith(new DisposableObserver<TopStories>() {
             @Override
             public void onNext(TopStories results) {
                 // 6 - Update RecyclerView after getting results from Top Stories API
