@@ -28,7 +28,7 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class SyncJob extends Job {
 
-    public static final String TAG = "demo_tag";
+    public static final String TAG = "notificationTag";
 
     @Override
     @NonNull
