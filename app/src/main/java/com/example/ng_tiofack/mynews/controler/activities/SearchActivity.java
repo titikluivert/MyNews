@@ -41,8 +41,8 @@ public class SearchActivity extends AppCompatActivity {
     private EditText dateView, dateView1, search_query_item;
     private int year, month, day;
     private ParamsOptions mParamsOptions = new ParamsOptions();
-    int categoriesChecked;
-    boolean[] categories;
+    private int categoriesChecked;
+    private boolean[] categories;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
