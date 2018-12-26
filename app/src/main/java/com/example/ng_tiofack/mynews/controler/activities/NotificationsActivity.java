@@ -1,5 +1,6 @@
 package com.example.ng_tiofack.mynews.controler.activities;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,10 +20,15 @@ import java.util.Objects;
 
 public class NotificationsActivity extends AppCompatActivity {
 
+    // variable for different categories
     boolean[] categories;
+    //query item
     EditText search_query_item;
+    //switch button to enable or disable notifications
     Switch mSwitch;
+    //flag to check if the categories are checked or not
     private int categoriesChecked;
+    //Saved values class
     SavedValues mySavedValues;
 
 
@@ -101,11 +107,11 @@ public class NotificationsActivity extends AppCompatActivity {
                     } else {
                         mSwitch.setChecked(false);
                         if(!(categoriesChecked > 0))
-                        Toast.makeText(NotificationsActivity.this, "you must check a list one box", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(getWindow().getDecorView().getRootView(), R.string.empty_checkbox_msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     }
                 } else {
                     mSwitch.setChecked(false);
-                    Toast.makeText(NotificationsActivity.this, "you must enter a query item", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getWindow().getDecorView().getRootView(), R.string.missing_query_item_msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
 
             }

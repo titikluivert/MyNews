@@ -170,7 +170,6 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onNext(ArticlesNews results) {
-                Utils.onFetchDataSuccess(results);
                 if (results.getResponse().getDocs().isEmpty()) {
                     //Toast.makeText(ctx, "no result was found", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_CANCELED);

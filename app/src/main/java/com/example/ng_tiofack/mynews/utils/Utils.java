@@ -86,21 +86,4 @@ public class Utils {
     }
 
 
-    void onFetchDataStarted() {
-
-    }
-
-    void onFetchDataCompleted() {
-
-    }
-
-    public static Object onFetchDataSuccess(Object object) {
-        return object;
-    }
-
-    void onFetchDataError(Throwable e) {
-
-    }
-
-
 }

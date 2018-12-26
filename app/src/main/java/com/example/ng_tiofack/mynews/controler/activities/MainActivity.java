@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobRequest;
 import com.example.ng_tiofack.mynews.R;
@@ -40,11 +39,18 @@ import io.reactivex.observers.DisposableObserver;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    // define an ActionBarDrawerToggle
     private ActionBarDrawerToggle mToggle;
+    //ID for notification job
     private static int iD;
+    // Saved values class
     SavedValues mySavedValues;
+    //Drawer Layout
     private DrawerLayout drawerLayout;
+    //ViewPager Adapter
     private ViewPagerAdapter adapter;
+    //view Pager
     private ViewPager viewPager;
 
     @Override
