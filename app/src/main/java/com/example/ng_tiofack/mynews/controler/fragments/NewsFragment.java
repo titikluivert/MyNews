@@ -71,7 +71,7 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
         this.configureRecyclerView(); // - 3 Call during UI creation
-       // 4 - Configure the SwipeRefreshLayout
+        // 4 - Configure the SwipeRefreshLayout
         this.configureOnClickRecyclerView();
         if (getArguments() != null) {
             String result = getArguments().getString(ARG_PARAM1);
@@ -86,6 +86,7 @@ public class NewsFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
     }
+
     // 2 - Configure the SwipeRefreshLayout
     private void configureSwipeRefreshLayout(final String result) {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -127,16 +128,41 @@ public class NewsFragment extends Fragment {
 
 
     private void executeHttpRequestWithRetrofitNews(String articles_checked) {
-        DisposableObserver<ArticlesNews> disposable = SearchServiceStreams.streamFetchSearchItems(null, articles_checked, null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
+
+        String query_item, articles__checked, begin_date, begin_end;
+
+        if (articles_checked.contains(";")) {
+
+            String[] retValue = articles_checked.split(";");
+
+            query_item = retValue[0];
+            articles__checked = retValue[1];
+
+            if (retValue[2].equals("null")) {
+                begin_date = null;
+            } else {
+                begin_date = retValue[2];
+            }
+
+            if (retValue[3].equals("null")) {
+                begin_end = null;
+            } else {
+                begin_end = retValue[3];
+            }
+
+        } else {
+            query_item = null;
+            articles__checked = articles_checked;
+            begin_date = null;
+            begin_end = null;
+
+        }
+
+        DisposableObserver<ArticlesNews> disposable = SearchServiceStreams.streamFetchSearchItems(query_item, articles__checked, begin_date, begin_end, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
 
             @Override
             public void onNext(ArticlesNews results) {
-                if (results.getResponse().getDocs().isEmpty()) {
-
-
-                } else {
                     updateUI(results.getResponse().getDocs());
-                }
             }
 
             @Override

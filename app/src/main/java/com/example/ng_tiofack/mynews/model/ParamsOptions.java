@@ -79,8 +79,6 @@ public class ParamsOptions {
             } else {
 
 
-
-
                 if ((dateView != null) || (dateView1 != null)) {
                     dateCombinedBegin = dateView;
                     dateCombinedEnd = dateView1;
