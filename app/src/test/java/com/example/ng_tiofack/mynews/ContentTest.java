@@ -49,7 +49,7 @@ public void fecthSignal() {
 
     storiesFragment.executeHttpRequestWithRetrofitTopStories();
 
-    InOrder inOrder = Mockito.inOrder();
+    //InOrder inOrder = Mockito.inOrder();
     //inOrder.verify(view, times(1)).onFetchDataSuccess(mTopStories);
 
 }
