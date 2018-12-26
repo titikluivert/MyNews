@@ -1,6 +1,7 @@
 package com.example.ng_tiofack.mynews.view.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +33,9 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularViewHold
         this.glide = glide;
     }
 
+    @NonNull
     @Override
-    public MostPopularViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MostPopularViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -44,7 +46,7 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularViewHold
 
     // UPDATE VIEW HOLDER WITH A TOP STORIES
     @Override
-    public void onBindViewHolder(MostPopularViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull MostPopularViewHolder viewHolder, int position) {
         // - 3 Passing the Glide object to each ViewHolder
         viewHolder.updateWithMostPopular(this.mostPopularResultsList.get(position), this.glide);
     }

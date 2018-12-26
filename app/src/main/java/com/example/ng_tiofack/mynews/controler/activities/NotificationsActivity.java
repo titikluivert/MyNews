@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
+
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.utils.Utils;
@@ -50,74 +51,17 @@ public class NotificationsActivity extends AppCompatActivity {
         if (categories == null) categories = new boolean[chbx_search.length];
 
         mSwitch.setChecked(mySavedValues.getswitchParams());
-        search_query_item.addTextChangedListener(new TextWatcher() {
-
-                                                      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                                                     }
-
-                                                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                                                         if (search_query_item.getText().toString().isEmpty()) {
-                                                             mSwitch.setChecked(false);
-                                                         }
-
-                                                     }
-
-                                                     public void afterTextChanged(Editable s) {
-
-                                                     }
-                                                 }
-        );
+        this.queryItemWatch();
 
         categoriesChecked = 0;
 
-        for (int i = 0; i < chbx_search.length; i++) {
-            final int finalI = i;
-
-            chbx_search[finalI]
-                    .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                            categoriesChecked += isChecked ? 1 : -1;
-                            categories[finalI] = isChecked;
-
-                            if (categoriesChecked == 0) {
-                                mSwitch.setChecked(false);
-
-                            }
-                        }
-                    });
-        }
+        this.configCategories(chbx_search);
 
         for (int i = 0; i < categories.length; i++) {
             chbx_search[i].setChecked(categories[i]);
         }
 
-        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (!search_query_item.getText().toString().isEmpty()) {
-
-                    if ((categoriesChecked > 0) && (mSwitch.isChecked())){
-                        mSwitch.setChecked(true);
-
-                    } else {
-                        mSwitch.setChecked(false);
-                        if(!(categoriesChecked > 0))
-                        Snackbar.make(getWindow().getDecorView().getRootView(), R.string.empty_checkbox_msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    }
-                } else {
-                    mSwitch.setChecked(false);
-                    Snackbar.make(getWindow().getDecorView().getRootView(), R.string.missing_query_item_msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                }
-
-            }
-
-        });
-
+        this.switchConfigParams(mSwitch);
     }
 
     @Override
@@ -137,4 +81,81 @@ public class NotificationsActivity extends AppCompatActivity {
         Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true);
     }
 
+    private void switchConfigParams(final Switch mSwitch) {
+        if (mSwitch != null) {
+
+
+            mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    if (!search_query_item.getText().toString().isEmpty()) {
+
+                        if ((categoriesChecked > 0) && (mSwitch.isChecked())) {
+                            mSwitch.setChecked(true);
+
+                        } else {
+                            mSwitch.setChecked(false);
+                            if (!(categoriesChecked > 0))
+                                Snackbar.make(getWindow().getDecorView().getRootView(), R.string.empty_checkbox_msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }
+                    } else {
+                        mSwitch.setChecked(false);
+                        Snackbar.make(getWindow().getDecorView().getRootView(), R.string.missing_query_item_msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    }
+
+                }
+
+            });
+        }
+    }
+
+    private void configCategories(CheckBox[] checkBoxes) {
+
+        if (checkBoxes != null) {
+
+            for (int i = 0; i < checkBoxes.length; i++) {
+                final int finalI = i;
+
+                checkBoxes[finalI]
+                        .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                                categoriesChecked += isChecked ? 1 : -1;
+                                categories[finalI] = isChecked;
+
+                                if (categoriesChecked == 0) {
+                                    mSwitch.setChecked(false);
+
+                                }
+                            }
+                        });
+            }
+        }
+    }
+
+    private void queryItemWatch() {
+
+        search_query_item.addTextChangedListener(new TextWatcher() {
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (search_query_item.getText().toString().isEmpty()) {
+                    mSwitch.setChecked(false);
+                }
+
+            }
+
+            public void afterTextChanged(Editable s) {
+
+            }
+
+        });
+
+    }
 }

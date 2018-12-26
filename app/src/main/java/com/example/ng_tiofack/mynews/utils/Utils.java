@@ -3,19 +3,12 @@ package com.example.ng_tiofack.mynews.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.SavedValues;
-import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
-import java.util.List;
-import java.util.Objects;
+
 
 /**
  * Created by NG-TIOFACK on 11/5/2018.
@@ -72,24 +65,5 @@ public class Utils {
         }
         return convertDate;
     }
-
-
-    public static String setResulttoJson(List<ArticlesNews.Response.Doc> business_response) {
-
-        Gson gson = new Gson();
-        return gson.toJson(business_response);
-    }
-
-    public static List<ArticlesNews.Response.Doc> getResultfromJson(String myJsonString) {
-
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<ArticlesNews.Response.Doc>>() {
-        }.getType();
-        return gson.fromJson(myJsonString, type);
-
-    }
-
-
-
 
 }

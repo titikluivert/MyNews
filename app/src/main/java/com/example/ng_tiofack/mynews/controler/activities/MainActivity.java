@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.menu_main_activity, menu);
         return true;
     }
-    // ----
 
     private void configureToolbar() {
         // Get the toolbar view inside the activity layout
@@ -138,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -202,8 +200,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent myIntent = new Intent(MainActivity.this, NotificationsActivity.class);
         this.startActivity(myIntent);
     }
-
-
 
     private void alertDialogAbout() {
         final ViewGroup parent = null;
