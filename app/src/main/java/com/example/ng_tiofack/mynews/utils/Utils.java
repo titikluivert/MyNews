@@ -3,6 +3,9 @@ package com.example.ng_tiofack.mynews.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.SavedValues;
@@ -12,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by NG-TIOFACK on 11/5/2018.

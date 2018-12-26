@@ -5,12 +5,9 @@ package com.example.ng_tiofack.mynews.model;
  */
 public class SavedValuesParams {
 
-
+    private String datebegin, dateend;
     private String queryItem;
     private String articleschecked;
-
-    public SavedValuesParams() {
-    }
 
     public SavedValuesParams(String queryItem, String articleschecked, String datebegin, String dateend) {
         this.queryItem = queryItem;
@@ -28,35 +25,18 @@ public class SavedValuesParams {
         return queryItem;
     }
 
-    public void setQueryItem(String queryItem) {
-        this.queryItem = queryItem;
-    }
-
     public String getArticleschecked() {
         return articleschecked;
-    }
-
-    public void setArticleschecked(String articleschecked) {
-        this.articleschecked = articleschecked;
     }
 
     public String getDatebegin() {
         return datebegin;
     }
 
-    public void setDatebegin(String datebegin) {
-        this.datebegin = datebegin;
-    }
-
     public String getDateend() {
         return dateend;
     }
 
-    public void setDateend(String dateend) {
-        this.dateend = dateend;
-    }
-
-    private String datebegin, dateend;
 
 
 }

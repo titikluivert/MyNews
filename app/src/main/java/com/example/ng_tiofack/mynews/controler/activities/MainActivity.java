@@ -14,7 +14,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,19 +22,15 @@ import android.view.ViewGroup;
 import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobRequest;
 import com.example.ng_tiofack.mynews.R;
-import com.example.ng_tiofack.mynews.controler.fragments.BusinessFragment;
 import com.example.ng_tiofack.mynews.controler.fragments.MostPopularFragment;
-import com.example.ng_tiofack.mynews.controler.fragments.NewFragment;
+import com.example.ng_tiofack.mynews.controler.fragments.NewsFragment;
 import com.example.ng_tiofack.mynews.controler.fragments.TopStoriesFragment;
 import com.example.ng_tiofack.mynews.model.SavedValues;
-import com.example.ng_tiofack.mynews.model.ArticlesNews;
-import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
 import com.example.ng_tiofack.mynews.utils.SyncJob;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.view.adapters.ViewPagerAdapter;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-import io.reactivex.observers.DisposableObserver;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -68,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Adding Fragments
         adapter.addFragment(new TopStoriesFragment(), "TOP STORIES");
         adapter.addFragment(new MostPopularFragment(), "MOST POPULAR");
-        adapter.addFragment(new BusinessFragment(), "BUSINESS");
+        adapter.addFragment(NewsFragment.newInstance(getString(R.string.news_desk_business)), "BUSINESS");
 
         // adapter Setup
         viewPager.setAdapter(adapter);
@@ -174,7 +169,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
-        this.executeHttpRequestWithRetrofitNews(aArg, tabName);
+        adapter.updateFragment(2, NewsFragment.newInstance(aArg), tabName);
+        viewPager.setCurrentItem(2);
         return true;
     }
     // ----
@@ -192,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (resultCode == RESULT_OK) {
 
                 String resultString = data.getStringExtra(getString(R.string.results_from_search_activity));
-                adapter.updateFragment(2, NewFragment.newInstance(resultString), "SEARCH");
+                adapter.updateFragment(2, NewsFragment.newInstance(resultString), "SEARCH");
                 viewPager.setCurrentItem(2);
             }
             if (resultCode == RESULT_CANCELED) {
@@ -207,32 +203,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.startActivity(myIntent);
     }
 
-    private void executeHttpRequestWithRetrofitNews(String articles_checked, final String tabName) {
-        DisposableObserver<ArticlesNews> disposable = SearchServiceStreams.streamFetchSearchItems(null, articles_checked, null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
 
-            @Override
-            public void onNext(ArticlesNews results) {
-                if (results.getResponse().getDocs().isEmpty()) {
-                    Snackbar.make(getWindow().getDecorView().getRootView(), R.string.no_result_search, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-
-                } else {
-                    String resultString = Utils.setResulttoJson(results.getResponse().getDocs());
-                    adapter.updateFragment(2, NewFragment.newInstance(resultString), tabName);
-                    viewPager.setCurrentItem(2);
-                }
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e("", getString(R.string.error_msg_rxjava) + e);
-            }
-
-            @Override
-            public void onComplete() {
-                Log.e("", "on complete is running");
-            }
-        });
-    }
 
     private void alertDialogAbout() {
         final ViewGroup parent = null;
