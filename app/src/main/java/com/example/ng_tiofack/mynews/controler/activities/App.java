@@ -1,6 +1,7 @@
 package com.example.ng_tiofack.mynews.controler.activities;
 
 import android.app.Application;
+
 import com.evernote.android.job.JobManager;
 import com.example.ng_tiofack.mynews.utils.ReminderJobCreator;
 

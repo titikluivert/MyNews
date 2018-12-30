@@ -1,4 +1,5 @@
 package com.example.ng_tiofack.mynews.controler.activities;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobRequest;
 import com.example.ng_tiofack.mynews.R;
@@ -29,11 +31,11 @@ import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.utils.SyncJob;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.view.adapters.ViewPagerAdapter;
+
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
 
     // define an ActionBarDrawerToggle
     private ActionBarDrawerToggle mToggle;
@@ -125,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 launchNotificationActivity();
                 return true;
             case R.id.menu_activity_main_help:
-                openHelp("https://www.nytimes.com");
+                openHelp(Utils.UrlRouter);
                 return true;
             case R.id.menu_activity_main_about:
                 this.alertDialogAbout();
@@ -171,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setCurrentItem(2);
         return true;
     }
+
     // ----
     private void launchSearchActivity() {
         Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);

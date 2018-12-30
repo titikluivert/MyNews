@@ -162,7 +162,7 @@ public class NewsFragment extends Fragment {
 
             @Override
             public void onNext(ArticlesNews results) {
-                    updateUI(results.getResponse().getDocs());
+                updateUI(results.getResponse().getDocs());
             }
 
             @Override

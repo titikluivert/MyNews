@@ -47,8 +47,8 @@ public class SearchActivity extends AppCompatActivity {
 
         dateView1 = findViewById(R.id.enddateText);
         ImageButton imgBtn1 = findViewById(R.id.enddatepicker);
-        this.datePickerMethod(imgBtn);
-        this.datePickerMethod(imgBtn1);
+        this.datePickerMethod(imgBtn,dateView);
+        this.datePickerMethod(imgBtn1,dateView1);
 
         Button searchBtn = findViewById(R.id.search_button);
         search_query_item = findViewById(R.id.searchqueryitem);
@@ -73,7 +73,6 @@ public class SearchActivity extends AppCompatActivity {
         Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true);
     }
 
-
     private void searchButtonMethod(Button searchButton) {
 
         if (searchButton != null) {
@@ -84,27 +83,27 @@ public class SearchActivity extends AppCompatActivity {
                     List<String> articles = new ArrayList<>();
                     SavedValuesParams savedValuesParams = mParamsOptions.checkParamsOptions(SearchActivity.this, search_query_item.getText().toString(), dateView.getText().toString(), dateView1.getText().toString(), categories, articles);
 
-                    if (savedValuesParams.getqueryItem().equals("SYMPTHOME_I")) {
+                    if (savedValuesParams.getQueryItem().equals("SYMPTHOME_I")) {
                         Sneaker.with(SearchActivity.this)
                                 .setTitle("Error")
                                 .setMessage("you must enter a query item")
                                 .sneakError();
 
-                    } else if (savedValuesParams.getqueryItem().equals("SYMPTHOME_II")) {
+                    } else if (savedValuesParams.getQueryItem().equals("SYMPTHOME_II")) {
                         Sneaker.with(SearchActivity.this)
                                 .setTitle("Error")
                                 .setMessage("the bigin date shall not be greater than the end date")
                                 .sneakError();
-                    } else if (savedValuesParams.getqueryItem().equals("SYMPTHOME_III")) {
+                    } else if (savedValuesParams.getQueryItem().equals("SYMPTHOME_III")) {
                         Sneaker.with(SearchActivity.this)
                                 .setTitle("Error")
                                 .setMessage("please you must check a least one box")
                                 .sneakError();
                     } else {
-                        String result =  savedValuesParams.getQueryItem()+";"+
-                                         savedValuesParams.getArticleschecked()+";"+
-                                         savedValuesParams.getDatebegin()+";"+
-                                         savedValuesParams.getDateend();
+                        String result = savedValuesParams.getQueryItem() + ";" +
+                                savedValuesParams.getArticleschecked() + ";" +
+                                savedValuesParams.getDatebegin() + ";" +
+                                savedValuesParams.getDateend();
                         finishResult(result);
                     }
                 }
@@ -115,12 +114,12 @@ public class SearchActivity extends AppCompatActivity {
 
     private void finishResult(String param_config) {
 
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra(getString(R.string.results_from_search_activity), param_config);
-            setResult(RESULT_OK, resultIntent);
-            finish();
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(getString(R.string.results_from_search_activity), param_config);
+        setResult(RESULT_OK, resultIntent);
+        finish();
 
-        }
+    }
 
     private void configCategories(CheckBox[] checkBoxes) {
 
@@ -143,7 +142,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    private void datePickerMethod(ImageButton imageButton) {
+    private void datePickerMethod(ImageButton imageButton, final EditText date_view) {
 
         if (imageButton != null) {
             imageButton.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +156,7 @@ public class SearchActivity extends AppCompatActivity {
                     mDatePickerDialog = new DatePickerDialog(SearchActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int myYear, int myMonth, int dayOfMonth) {
-                            dateView1.setText(dayOfMonth + "/" + (myMonth + 1) + "/" + myYear);
+                            date_view.setText(dayOfMonth + "/" + (myMonth + 1) + "/" + myYear);
                         }
                     }, year, month, day);
                     mDatePickerDialog.show();

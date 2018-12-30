@@ -3,10 +3,12 @@ package com.example.ng_tiofack.mynews.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 
 
@@ -14,6 +16,8 @@ import java.lang.reflect.Type;
  * Created by NG-TIOFACK on 11/5/2018.
  */
 public class Utils {
+
+    public static final String UrlRouter = "https://www.nytimes.com";
 
     public static final String apiKeyNYT = "a327efabb73048adbaf8ccb2605f8d1b";
 

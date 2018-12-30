@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers;
 public class TopStoriesStreams {
 
 
-    public static Observable<TopStories> streamFetchTopStories(String api_key){
+    public static Observable<TopStories> streamFetchTopStories(String api_key) {
         TopStoriesService topStoriesService = TopStoriesService.retrofit.create(TopStoriesService.class);
         return topStoriesService.getApiKey(api_key)
                 .subscribeOn(Schedulers.io())

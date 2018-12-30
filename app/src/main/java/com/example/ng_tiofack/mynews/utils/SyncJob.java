@@ -11,13 +11,11 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import com.evernote.android.job.Job;
 import com.example.ng_tiofack.mynews.R;
-
 import com.example.ng_tiofack.mynews.model.ParamsOptions;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.model.SavedValuesParams;
 import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -65,7 +63,7 @@ public class SyncJob extends Job {
 
             @Override
             public void onError(Throwable e) {
-                Log.e("", "une erreur est survenue>" + e);
+                Log.e("", "une erreur est survenue" + e);
             }
 
             @Override

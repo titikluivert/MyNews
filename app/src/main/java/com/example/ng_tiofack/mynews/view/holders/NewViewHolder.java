@@ -53,6 +53,9 @@ public class NewViewHolder extends RecyclerView.ViewHolder {
             case "Your Money":
                 glide.load(R.drawable.yourmoneylogo).apply(RequestOptions.circleCropTransform()).into(imageView);
                 break;
+            case "Business":
+                glide.load(R.drawable.business_logo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                break;
             default:
                 glide.load(R.drawable.file_search).apply(RequestOptions.circleCropTransform()).into(imageView);
                 break;

@@ -126,12 +126,12 @@ public class TopStoriesFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
-                Log.e("","Error "+e);
+                Log.e("", "Error " + e);
             }
 
             @Override
             public void onComplete() {
-                Log.e("","ends with or without success");
+                Log.e("", "ends with or without success");
             }
         });
     }

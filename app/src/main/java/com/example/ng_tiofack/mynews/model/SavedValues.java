@@ -8,7 +8,7 @@ public class SavedValues {
 
     private String queryItem;
     private boolean switchParams;
-    private boolean [] categories;
+    private boolean[] categories;
 
     public SavedValues(boolean switchParams, String queryItem, boolean[] categories) {
         this.switchParams = switchParams;

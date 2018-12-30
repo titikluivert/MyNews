@@ -17,10 +17,6 @@ public class SavedValuesParams {
 
     }
 
-    public String getqueryItem() {
-        return queryItem;
-    }
-
     public String getQueryItem() {
         return queryItem;
     }
@@ -36,7 +32,6 @@ public class SavedValuesParams {
     public String getDateend() {
         return dateend;
     }
-
 
 
 }

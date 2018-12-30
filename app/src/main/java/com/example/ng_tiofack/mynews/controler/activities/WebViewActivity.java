@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.example.ng_tiofack.mynews.R;
+
 import java.util.Objects;
 
 public class WebViewActivity extends AppCompatActivity {

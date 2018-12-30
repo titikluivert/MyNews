@@ -95,6 +95,7 @@ public class MostPopularFragment extends Fragment {
         // 3.4 - Set layout manager to position the items
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
+
     // 1 - Configure item click on RecyclerView
     private void configureOnClickRecyclerView() {
         ItemClickSupport.addTo(recyclerView, R.layout.fragment_item)
@@ -122,12 +123,12 @@ public class MostPopularFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
-                Log.e("","une erreur est survenue>"+e);
+                Log.e("", "une erreur est survenue>" + e);
             }
 
             @Override
             public void onComplete() {
-                Log.e("","on complete is running");
+                Log.e("", "on complete is running");
             }
         });
     }
