@@ -20,6 +20,12 @@ public interface SearchService {
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     OkHttpClient.Builder client = new OkHttpClient.Builder()
             .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("https://api.nytimes.com/svc/search/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(client.build())
+            .build();
 
     @GET("articlesearch.json")
     Observable<ArticlesNews> getSearchItems(
@@ -31,12 +37,5 @@ public interface SearchService {
             @Query("api_key") String api_key
 
     );
-
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.nytimes.com/svc/search/v2/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(client.build())
-            .build();
 
 }

@@ -267,6 +267,80 @@ public class MostPopular {
             this.media = media;
         }
 
+        public static class OptionsDeserilizer implements JsonDeserializer<Result> {
+
+            @Override
+            public Result deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+
+                Result result = new Gson().fromJson(json, Result.class);
+                JsonObject jsonObject = json.getAsJsonObject();
+
+                if (jsonObject.has("org_facet")) {
+                    JsonElement elem = jsonObject.get("org_facet");
+
+                    if (elem != null && !elem.isJsonNull()) {
+
+                        if (elem.isJsonPrimitive()) {
+                            result.setOrgFacet(null);
+                        } else {
+                            JsonArray array = jsonObject.getAsJsonArray("org_facet");
+                            List<String> data = new Gson().fromJson(array, new TypeToken<ArrayList<String>>() {
+                            }.getType());
+                            result.setOrgFacet(data);
+                        }
+                    }
+                }
+
+                if (jsonObject.has("des_facet")) {
+                    JsonElement elem1 = jsonObject.get("des_facet");
+
+                    if (elem1 != null && !elem1.isJsonNull()) {
+
+                        if (elem1.isJsonPrimitive()) {
+                            result.setDesFacet(null);
+                        } else {
+                            JsonArray array = jsonObject.getAsJsonArray("des_facet");
+                            List<String> data = new Gson().fromJson(array, new TypeToken<ArrayList<String>>() {
+                            }.getType());
+                            result.setDesFacet(data);
+                        }
+                    }
+                }
+                if (jsonObject.has("per_facet")) {
+                    JsonElement elem2 = jsonObject.get("per_facet");
+
+                    if (elem2 != null && !elem2.isJsonNull()) {
+
+                        if (elem2.isJsonPrimitive()) {
+                            result.setPerFacet(null);
+                        } else {
+                            JsonArray array = jsonObject.getAsJsonArray("per_facet");
+                            List<String> data = new Gson().fromJson(array, new TypeToken<ArrayList<String>>() {
+                            }.getType());
+                            result.setPerFacet(data);
+                        }
+                    }
+                }
+
+                if (jsonObject.has("geo_facet")) {
+                    JsonElement elem3 = jsonObject.get("geo_facet");
+
+                    if (elem3 != null && !elem3.isJsonNull()) {
+
+                        if (elem3.isJsonPrimitive()) {
+                            result.setGeoFacet(null);
+                        } else {
+                            JsonArray array = jsonObject.getAsJsonArray("geo_facet");
+                            List<String> data = new Gson().fromJson(array, new TypeToken<ArrayList<String>>() {
+                            }.getType());
+                            result.setGeoFacet(data);
+                        }
+                    }
+                }
+                return result;
+            }
+        }
+
         public class Medium {
 
             @SerializedName("type")
@@ -385,81 +459,6 @@ public class MostPopular {
 
             }
 
-        }
-
-
-        public static class OptionsDeserilizer implements JsonDeserializer<Result> {
-
-            @Override
-            public Result deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-
-                Result result = new Gson().fromJson(json, Result.class);
-                JsonObject jsonObject = json.getAsJsonObject();
-
-                if (jsonObject.has("org_facet")) {
-                    JsonElement elem = jsonObject.get("org_facet");
-
-                    if (elem != null && !elem.isJsonNull()) {
-
-                        if (elem.isJsonPrimitive()) {
-                            result.setOrgFacet(null);
-                        } else {
-                            JsonArray array = jsonObject.getAsJsonArray("org_facet");
-                            List<String> data = new Gson().fromJson(array, new TypeToken<ArrayList<String>>() {
-                            }.getType());
-                            result.setOrgFacet(data);
-                        }
-                    }
-                }
-
-                if (jsonObject.has("des_facet")) {
-                    JsonElement elem1 = jsonObject.get("des_facet");
-
-                    if (elem1 != null && !elem1.isJsonNull()) {
-
-                        if (elem1.isJsonPrimitive()) {
-                            result.setDesFacet(null);
-                        } else {
-                            JsonArray array = jsonObject.getAsJsonArray("des_facet");
-                            List<String> data = new Gson().fromJson(array, new TypeToken<ArrayList<String>>() {
-                            }.getType());
-                            result.setDesFacet(data);
-                        }
-                    }
-                }
-                if (jsonObject.has("per_facet")) {
-                    JsonElement elem2 = jsonObject.get("per_facet");
-
-                    if (elem2 != null && !elem2.isJsonNull()) {
-
-                        if (elem2.isJsonPrimitive()) {
-                            result.setPerFacet(null);
-                        } else {
-                            JsonArray array = jsonObject.getAsJsonArray("per_facet");
-                            List<String> data = new Gson().fromJson(array, new TypeToken<ArrayList<String>>() {
-                            }.getType());
-                            result.setPerFacet(data);
-                        }
-                    }
-                }
-
-                if (jsonObject.has("geo_facet")) {
-                    JsonElement elem3 = jsonObject.get("geo_facet");
-
-                    if (elem3 != null && !elem3.isJsonNull()) {
-
-                        if (elem3.isJsonPrimitive()) {
-                            result.setGeoFacet(null);
-                        } else {
-                            JsonArray array = jsonObject.getAsJsonArray("geo_facet");
-                            List<String> data = new Gson().fromJson(array, new TypeToken<ArrayList<String>>() {
-                            }.getType());
-                            result.setGeoFacet(data);
-                        }
-                    }
-                }
-                return result;
-            }
         }
     }
 }

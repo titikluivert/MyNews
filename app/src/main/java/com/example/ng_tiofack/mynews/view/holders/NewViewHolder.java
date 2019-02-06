@@ -11,7 +11,6 @@ import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.Utils;
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

@@ -16,10 +16,10 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
+import com.example.ng_tiofack.mynews.model.MostPopular;
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.utils.streams.MostPopularStreams;
-import com.example.ng_tiofack.mynews.model.MostPopular;
 import com.example.ng_tiofack.mynews.view.adapters.MostPopularAdapter;
 
 import java.util.ArrayList;
@@ -27,7 +27,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
@@ -43,13 +42,12 @@ public class MostPopularFragment extends Fragment {
     // 1 - Declare the SwipeRefreshLayout
     @BindView(R.id.fragment_most_popular_swipe_container)
     SwipeRefreshLayout swipeRefreshLayout;
-
+    MostPopular.Result mostpopularRersponse;
     //FOR DATA
     private Disposable disposable;
     // 2 - Declare list of results (MostPopular) & Adapter
     private List<MostPopular.Result> mostPopularResultsList;
     private MostPopularAdapter adapter;
-    MostPopular.Result mostpopularRersponse;
 
     public MostPopularFragment() {
     }

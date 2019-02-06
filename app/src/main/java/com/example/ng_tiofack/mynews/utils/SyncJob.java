@@ -9,16 +9,17 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
+
 import com.evernote.android.job.Job;
 import com.example.ng_tiofack.mynews.R;
+import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.model.ParamsOptions;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.model.SavedValuesParams;
-import com.example.ng_tiofack.mynews.model.ArticlesNews;
 import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Objects;
+
 import io.reactivex.observers.DisposableObserver;
 
 /**
@@ -31,10 +32,10 @@ public class SyncJob extends Job {
     @Override
     @NonNull
     protected Result onRunJob(@NonNull Params params) {
-        ParamsOptions paramsOptions = new ParamsOptions();
-        List<String> articles = new ArrayList<>();
+        ParamsOptions paramsOptions = new ParamsOptions(getContext().getResources().getStringArray(R.array.topicArray));
+
         SavedValues mySavedValues = Utils.getNotificationParam(this.getContext());
-        SavedValuesParams savedValuesParams = paramsOptions.checkParamsOptions(this.getContext(), mySavedValues.getqueryItem(), null, null, mySavedValues.getCategories(), articles);
+        SavedValuesParams savedValuesParams = paramsOptions.checkParamsOptions(mySavedValues.getqueryItem(), null, null, mySavedValues.getCategories());
         DisposableObserver<ArticlesNews> disposable = SearchServiceStreams.streamFetchSearchItems(mySavedValues.getqueryItem(), savedValuesParams.getArticleschecked(), null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
 
             @Override

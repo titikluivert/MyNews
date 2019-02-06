@@ -54,7 +54,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesViewHolder
         return this.mtopStoriesResultsList.size();
     }
 
-    public TopStories.Result getTopStroiesResults(int position){
+    public TopStories.Result getTopStroiesResults(int position) {
         return this.mtopStoriesResultsList.get(position);
     }
 }

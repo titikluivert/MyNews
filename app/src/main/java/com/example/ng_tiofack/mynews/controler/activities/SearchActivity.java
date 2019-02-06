@@ -2,9 +2,9 @@ package com.example.ng_tiofack.mynews.controler.activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -19,9 +19,7 @@ import com.example.ng_tiofack.mynews.model.ParamsOptions;
 import com.example.ng_tiofack.mynews.model.SavedValuesParams;
 import com.irozon.sneaker.Sneaker;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -30,9 +28,9 @@ public class SearchActivity extends AppCompatActivity {
 
     private DatePickerDialog mDatePickerDialog;
     private Calendar calendar;
-    private EditText dateView, dateView1, search_query_item;
+    private EditText dateBegin, dateEnd, search_query_item;
     private int year, month, day;
-    private ParamsOptions mParamsOptions = new ParamsOptions();
+    private ParamsOptions mParamsOptions;
     private int categoriesChecked;
     private boolean[] categories;
 
@@ -42,13 +40,15 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         this.configureToolbar();
 
-        dateView = findViewById(R.id.bigindateText);
+        dateBegin = findViewById(R.id.bigindateText);
         ImageButton imgBtn = findViewById(R.id.bigindatepicker);
 
-        dateView1 = findViewById(R.id.enddateText);
+        mParamsOptions = new ParamsOptions(this.getResources().getStringArray(R.array.topicArray));
+
+        dateEnd = findViewById(R.id.enddateText);
         ImageButton imgBtn1 = findViewById(R.id.enddatepicker);
-        this.datePickerMethod(imgBtn,dateView);
-        this.datePickerMethod(imgBtn1,dateView1);
+        this.datePickerMethod(imgBtn, dateBegin);
+        this.datePickerMethod(imgBtn1, dateEnd);
 
         Button searchBtn = findViewById(R.id.search_button);
         search_query_item = findViewById(R.id.searchqueryitem);
@@ -80,8 +80,7 @@ public class SearchActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    List<String> articles = new ArrayList<>();
-                    SavedValuesParams savedValuesParams = mParamsOptions.checkParamsOptions(SearchActivity.this, search_query_item.getText().toString(), dateView.getText().toString(), dateView1.getText().toString(), categories, articles);
+                    SavedValuesParams savedValuesParams = mParamsOptions.checkParamsOptions(search_query_item.getText().toString(), dateBegin.getText().toString(), dateEnd.getText().toString(), categories);
 
                     if (savedValuesParams.getQueryItem().equals("SYMPTHOME_I")) {
                         Sneaker.with(SearchActivity.this)

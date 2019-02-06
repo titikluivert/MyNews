@@ -12,7 +12,6 @@ import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.MostPopular;
 import com.example.ng_tiofack.mynews.view.holders.MostPopularViewHolder;
 
-
 import java.util.List;
 
 /**
@@ -57,7 +56,7 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularViewHold
         return this.mostPopularResultsList.size();
     }
 
-    public MostPopular.Result getMostPopularResults(int position){
+    public MostPopular.Result getMostPopularResults(int position) {
         return this.mostPopularResultsList.get(position);
     }
 }

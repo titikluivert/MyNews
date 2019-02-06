@@ -12,14 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.WebViewActivity;
+import com.example.ng_tiofack.mynews.model.TopStories;
 import com.example.ng_tiofack.mynews.utils.ItemClickSupport;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.utils.streams.TopStoriesStreams;
-import com.example.ng_tiofack.mynews.model.TopStories;
 import com.example.ng_tiofack.mynews.view.adapters.TopStoriesAdapter;
 
 import java.util.ArrayList;
@@ -51,9 +50,9 @@ public class TopStoriesFragment extends Fragment {
     //private TopStories topStories;
     private TopStoriesAdapter adapter;
 
-    private List<TopStories.Result> mtopStoriesResultsList;
+    private List<TopStories.Result> mTopStoriesResultsList;
 
-    private TopStories.Result topstoriesRersponse;
+    private TopStories.Result topStoriesResponse;
 
     public TopStoriesFragment() {
         // Required empty public constructor
@@ -90,9 +89,9 @@ public class TopStoriesFragment extends Fragment {
     // 3 - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
 
-        this.mtopStoriesResultsList = new ArrayList<>();
+        this.mTopStoriesResultsList = new ArrayList<>();
         // 3.2 - Create adapter passing the list of users
-        this.adapter = new TopStoriesAdapter(this.mtopStoriesResultsList, Glide.with(this));
+        this.adapter = new TopStoriesAdapter(this.mTopStoriesResultsList, Glide.with(this));
         // 3.3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items
@@ -105,9 +104,9 @@ public class TopStoriesFragment extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        topstoriesRersponse = adapter.getTopStroiesResults(position);
+                        topStoriesResponse = adapter.getTopStroiesResults(position);
                         Intent myIntent = new Intent(getActivity(), WebViewActivity.class);
-                        myIntent.putExtra(getString(R.string.articleUrl), topstoriesRersponse.getUrl());
+                        myIntent.putExtra(getString(R.string.articleUrl), topStoriesResponse.getUrl());
                         startActivity(myIntent);
                     }
                 });
@@ -147,8 +146,8 @@ public class TopStoriesFragment extends Fragment {
     private void updateUI(List<TopStories.Result> results) {
         // 3 - Stop refreshing and clear actual list of results
         swipeRefreshLayout.setRefreshing(false);
-        mtopStoriesResultsList.clear();
-        mtopStoriesResultsList.addAll(results);
+        mTopStoriesResultsList.clear();
+        mTopStoriesResultsList.addAll(results);
         adapter.notifyDataSetChanged();
     }
 

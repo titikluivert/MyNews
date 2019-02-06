@@ -32,7 +32,7 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> {
         this.glide = glide;
     }
 
-    public void setDocList( List<ArticlesNews.Response.Doc> list) {
+    public void setDocList(List<ArticlesNews.Response.Doc> list) {
         this.myDocsList = list;
         this.notifyDataSetChanged();
     }
@@ -62,7 +62,7 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> {
         return this.myDocsList.size();
     }
 
-    public ArticlesNews.Response.Doc getBusinessDoc(int position){
+    public ArticlesNews.Response.Doc getBusinessDoc(int position) {
         return this.myDocsList.get(position);
     }
 }

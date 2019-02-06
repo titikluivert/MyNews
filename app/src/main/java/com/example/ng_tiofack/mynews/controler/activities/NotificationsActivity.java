@@ -1,9 +1,9 @@
 package com.example.ng_tiofack.mynews.controler.activities;
 
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.SavedValues;
@@ -27,11 +26,10 @@ public class NotificationsActivity extends AppCompatActivity {
     EditText search_query_item;
     //switch button to enable or disable notifications
     Switch mSwitch;
-    //flag to check if the categories are checked or not
-    private int categoriesChecked;
     //Saved values class
     SavedValues mySavedValues;
-
+    //flag to check if the categories are checked or not
+    private int categoriesChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class NotificationsActivity extends AppCompatActivity {
         this.configureToolbar();
 
         mSwitch = findViewById(R.id.enable_notifications);
-        search_query_item = findViewById(R.id.editText);
+        search_query_item = findViewById(R.id.editText_notiification);
         final CheckBox[] chbx_search = {findViewById(R.id.checkBox1), findViewById(R.id.checkBox2), findViewById(R.id.checkBox3),
                 findViewById(R.id.checkBox4), findViewById(R.id.checkBox5), findViewById(R.id.checkBox6)};
 

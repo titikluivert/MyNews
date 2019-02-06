@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.example.ng_tiofack.mynews.R;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,12 +13,18 @@ import java.util.List;
  */
 public class ParamsOptions {
 
+    private String[] topicsArray;
     public ParamsOptions() {
-
     }
 
-    public SavedValuesParams checkParamsOptions(Context context, String search_query_item, String dateView, String dateView1, boolean[] categories, List<String> articles) {
 
+    public ParamsOptions(String [] topicArray) {
+      this.topicsArray = topicArray;
+    }
+
+    public SavedValuesParams checkParamsOptions(String search_query_item, String dateBegin, String dateEnd, boolean[] categories) {
+
+        List<String> articles = new ArrayList<>();
         String dateCombinedBegin = null;
         String dateCombinedEnd = null;
         StringBuilder articleChecked = null;
@@ -24,7 +32,6 @@ public class ParamsOptions {
         if (!search_query_item.isEmpty()) {
 
             boolean b_article = true;
-            String[] topicsArray = context.getResources().getStringArray(R.array.topicArray);
 
             for (int i = 0; i < categories.length; i++) {
                 if (categories[i]) {
@@ -40,17 +47,17 @@ public class ParamsOptions {
             if (!b_article)
                 articleChecked = new StringBuilder("news_desk:" + articleChecked.toString().trim() + ")");
 
-            if ((!(dateView == null) && !(dateView1 == null)) && (!dateView.isEmpty() && !dateView1.isEmpty())) {
+            if ((!(dateBegin == null) && !(dateEnd == null)) && (!dateBegin.isEmpty() && !dateEnd.isEmpty())) {
 
-                String[] values = splitDateAndTurnToTheCorrectFormat(search_query_item, dateView, dateView1, articles);
+                String[] values = splitDateAndTurnToTheCorrectFormat(search_query_item, dateBegin, dateEnd, articles);
                 dateCombinedBegin = values[0];
                 dateCombinedEnd = values[1];
                 search_query_item = values[2];
 
             } else {
 
-                dateCombinedBegin = changeDateToCorrectFormat(dateView);
-                dateCombinedEnd = changeDateToCorrectFormat(dateView1);
+                dateCombinedBegin = changeDateToCorrectFormat(dateBegin);
+                dateCombinedEnd = changeDateToCorrectFormat(dateEnd);
             }
 
         } else {
@@ -83,7 +90,7 @@ public class ParamsOptions {
         return retValue;
     }
 
-    public String[] splitDateAndTurnToTheCorrectFormat(String s0,String s, String s1, List<String> articles) {
+    public String[] splitDateAndTurnToTheCorrectFormat(String s0, String s, String s1, List<String> articles) {
 
         String[] retValue = new String[3];
 
@@ -113,7 +120,7 @@ public class ParamsOptions {
 
             if (articles.isEmpty()) {
                 retValue[2] = "SYMPTHOME_III";
-            }else {
+            } else {
                 retValue[2] = s0;
             }
 

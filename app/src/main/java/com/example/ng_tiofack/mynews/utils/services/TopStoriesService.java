@@ -3,7 +3,6 @@ package com.example.ng_tiofack.mynews.utils.services;
 import com.example.ng_tiofack.mynews.model.TopStories;
 
 import io.reactivex.Observable;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -22,15 +21,13 @@ public interface TopStoriesService {
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     OkHttpClient.Builder client = new OkHttpClient.Builder()
             .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
-
-
-    @GET("home.json")
-    Observable<TopStories> getApiKey(@Query("api-key") String api_key);
-
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/topstories/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(client.build())
             .build();
+
+    @GET("home.json")
+    Observable<TopStories> getApiKey(@Query("api-key") String api_key);
 }

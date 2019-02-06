@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by NG-TIOFACK on 12/28/2018.
  */
-public class TestDateFormat {
+public class DateFormatTest {
 
     private ParamsOptions mParamsOptions = new ParamsOptions();
 
