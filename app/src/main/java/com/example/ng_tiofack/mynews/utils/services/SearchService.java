@@ -16,7 +16,6 @@ import retrofit2.http.Query;
  */
 public interface SearchService {
 
-
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     OkHttpClient.Builder client = new OkHttpClient.Builder()
             .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
@@ -34,7 +33,7 @@ public interface SearchService {
             @Query(value = "fq", encoded = true) String articleChecked,
             @Query("begin_date") String dateCombinedBegin,
             @Query("end_date") String dateCombinedEnd,
-            @Query("api_key") String api_key
+            @Query("api-key") String api_key
 
     );
 
