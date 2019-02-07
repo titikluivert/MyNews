@@ -33,7 +33,6 @@ public class RequestRetrofitTest {
         //@Mock
         //MovieAPIService mockMovieAPIService;
 
-
         //@Mock ResponseBody responseBody;
         //@Mock MovieListModelContract.PopularMovieResultsListener mockPopularMoviesResultsListener;
 
@@ -49,7 +48,7 @@ public class RequestRetrofitTest {
         when(topStoriesService.getApiKey(Utils.apiKeyNYT)).thenReturn(Observable.just(results));
 
       //  movieListModelContract.getPopularMovies(mockPopularMoviesResultsListener);
-       // verify(mockPopularMoviesResultsListener, never()).onFailure(anyString());
+      // verify(mockPopularMoviesResultsListener, never()).onFailure(anyString());
       //  verify(mockPopularMoviesResultsListener, times(1)).onSuccess(results);
 
 
