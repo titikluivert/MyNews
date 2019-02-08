@@ -1,10 +1,5 @@
 package com.example.ng_tiofack.mynews.model;
 
-import android.content.Context;
-
-import com.example.ng_tiofack.mynews.R;
-
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 

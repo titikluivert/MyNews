@@ -7,6 +7,7 @@ import com.example.ng_tiofack.mynews.utils.services.TopStoriesService;
 
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.verification.VerificationMode;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -15,6 +16,8 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -46,10 +49,10 @@ public class RequestRetrofitTest {
         // assertEquals(true, movieResponse.isSuccessful());*/
 
         when(topStoriesService.getApiKey(Utils.apiKeyNYT)).thenReturn(Observable.just(results));
-
+        verify(results, (VerificationMode) results);
       //  movieListModelContract.getPopularMovies(mockPopularMoviesResultsListener);
       // verify(mockPopularMoviesResultsListener, never()).onFailure(anyString());
-      //  verify(mockPopularMoviesResultsListener, times(1)).onSuccess(results);
+      //
 
 
     }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -66,6 +67,13 @@ public class NotificationsActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Utils.saveNotificationParam(NotificationsActivity.this, mSwitch.isChecked(), search_query_item.getText().toString(), categories);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()== android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
     }
 
     private void configureToolbar() {

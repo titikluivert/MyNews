@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -36,5 +37,12 @@ public class WebViewActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         // Enable the Up button
         Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()== android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
     }
 }

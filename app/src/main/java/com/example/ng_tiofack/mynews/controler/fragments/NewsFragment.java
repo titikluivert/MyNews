@@ -29,8 +29,7 @@ import butterknife.ButterKnife;
 import io.reactivex.observers.DisposableObserver;
 
 public class NewsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.fragment_news_recycler_view)
     RecyclerView recyclerView; // 1 - Declare RecyclerView
@@ -49,14 +48,6 @@ public class NewsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param result Parameter 1.
-     * @return A new instance of fragment NewsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static NewsFragment newInstance(String result) {
         NewsFragment fragment = new NewsFragment();
         Bundle args = new Bundle();

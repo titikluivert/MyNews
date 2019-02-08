@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,7 +32,6 @@ public class SearchActivity extends AppCompatActivity {
     private EditText dateBegin, dateEnd, search_query_item;
     private int year, month, day;
     private ParamsOptions mParamsOptions;
-    private int categoriesChecked;
     private boolean[] categories;
 
     @Override
@@ -55,8 +55,6 @@ public class SearchActivity extends AppCompatActivity {
         final CheckBox[] checkbox_search = {findViewById(R.id.checkBoxArt), findViewById(R.id.checkBoxBusiness), findViewById(R.id.checkBoxEntrepreneurs),
                 findViewById(R.id.checkBoxpolitics), findViewById(R.id.checkBoxsports), findViewById(R.id.checkBoxtravel)};
 
-        categoriesChecked = 0;
-
         if (categories == null) categories = new boolean[checkbox_search.length];
         this.configCategories(checkbox_search);
         this.searchButtonMethod(searchBtn);
@@ -73,6 +71,13 @@ public class SearchActivity extends AppCompatActivity {
         Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()== android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
+    }
+
     private void searchButtonMethod(Button searchButton) {
 
         if (searchButton != null) {
@@ -82,28 +87,33 @@ public class SearchActivity extends AppCompatActivity {
 
                     SavedValuesParams savedValuesParams = mParamsOptions.checkParamsOptions(search_query_item.getText().toString(), dateBegin.getText().toString(), dateEnd.getText().toString(), categories);
 
-                    if (savedValuesParams.getQueryItem().equals("SYMPTHOME_I")) {
-                        Sneaker.with(SearchActivity.this)
-                                .setTitle("Error")
-                                .setMessage("you must enter a query item")
-                                .sneakError();
+                    switch (savedValuesParams.getQueryItem()) {
+                        case "SYMPTHOME_I":
+                            Sneaker.with(SearchActivity.this)
+                                    .setTitle("Error")
+                                    .setMessage("you must enter a query item")
+                                    .sneakError();
 
-                    } else if (savedValuesParams.getQueryItem().equals("SYMPTHOME_II")) {
-                        Sneaker.with(SearchActivity.this)
-                                .setTitle("Error")
-                                .setMessage("the bigin date shall not be greater than the end date")
-                                .sneakError();
-                    } else if (savedValuesParams.getQueryItem().equals("SYMPTHOME_III")) {
-                        Sneaker.with(SearchActivity.this)
-                                .setTitle("Error")
-                                .setMessage("please you must check a least one box")
-                                .sneakError();
-                    } else {
-                        String result = savedValuesParams.getQueryItem() + ";" +
-                                savedValuesParams.getArticleschecked() + ";" +
-                                savedValuesParams.getDatebegin() + ";" +
-                                savedValuesParams.getDateend();
-                        finishResult(result);
+                            break;
+                        case "SYMPTHOME_II":
+                            Sneaker.with(SearchActivity.this)
+                                    .setTitle("Error")
+                                    .setMessage("the bigin date shall not be greater than the end date")
+                                    .sneakError();
+                            break;
+                        case "SYMPTHOME_III":
+                            Sneaker.with(SearchActivity.this)
+                                    .setTitle("Error")
+                                    .setMessage("please you must check a least one box")
+                                    .sneakError();
+                            break;
+                        default:
+                            String result = savedValuesParams.getQueryItem() + ";" +
+                                    savedValuesParams.getArticleschecked() + ";" +
+                                    savedValuesParams.getDatebegin() + ";" +
+                                    savedValuesParams.getDateend();
+                            finishResult(result);
+                            break;
                     }
                 }
             });
@@ -131,8 +141,6 @@ public class SearchActivity extends AppCompatActivity {
                         .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                                categoriesChecked += isChecked ? 1 : -1;
                                 categories[finalI] = isChecked;
 
                             }

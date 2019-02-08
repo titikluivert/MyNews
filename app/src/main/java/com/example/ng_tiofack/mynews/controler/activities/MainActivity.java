@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        Log.d("mainactivity","oncreate");
         if (mySavedValues.getswitchParams()) {
             iD = schedulePeriodicJob();
         } else {
