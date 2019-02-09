@@ -38,8 +38,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    //ID for notification job
-    private static int iD;
     // Saved values class
     SavedValues mySavedValues;
     // define an ActionBarDrawerToggle
@@ -81,13 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        Log.d("mainactivity","oncreate");
-        if (mySavedValues.getswitchParams()) {
-            iD = schedulePeriodicJob();
-        } else {
-            cancelJob(iD);
-        }
-
     }
 
     @Override
@@ -102,19 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         // Sets the Toolbar
         setSupportActionBar(toolbar);
-    }
-
-    private int schedulePeriodicJob() {
-
-        return new JobRequest.Builder(SyncJob.TAG)
-                .setPeriodic(TimeUnit.DAYS.toMillis(1))
-                .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
-                .build()
-                .schedule();
-    }
-
-    private void cancelJob(int jobId) {
-        JobManager.instance().cancel(jobId);
     }
 
     @Override

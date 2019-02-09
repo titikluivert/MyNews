@@ -43,13 +43,13 @@ public class RequestRetrofitTest {
         // Observable<TopStories> topRatedList = TopStoriesStreams.streamFetchTopStories(Utils.apiKeyNYT);
         //Observable<TopStories> movieResponse = topRatedList.doOnNext()
 
-        TopStoriesService topStoriesService = TopStoriesService.retrofit.create(TopStoriesService.class);
+        // TopStoriesService topStoriesService = TopStoriesService.retrofit.create(TopStoriesService.class);
        // Observable<TopStories> topRatedList = topStoriesService.getApiKey(Utils.apiKeyNYT).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).timeout(10, TimeUnit.SECONDS);
         //assertEquals(movieResponse.code(), 200);
         // assertEquals(true, movieResponse.isSuccessful());*/
 
-        when(topStoriesService.getApiKey(Utils.apiKeyNYT)).thenReturn(Observable.just(results));
-        verify(results, (VerificationMode) results);
+       // when(topStoriesService.getApiKey(Utils.apiKeyNYT)).thenReturn(Observable.just(results));
+       // verify(results, (VerificationMode) results);
       //  movieListModelContract.getPopularMovies(mockPopularMoviesResultsListener);
       // verify(mockPopularMoviesResultsListener, never()).onFailure(anyString());
       //

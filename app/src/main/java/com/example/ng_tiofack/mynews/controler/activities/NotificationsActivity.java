@@ -13,14 +13,20 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import com.evernote.android.job.JobManager;
+import com.evernote.android.job.JobRequest;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.model.SavedValues;
+import com.example.ng_tiofack.mynews.utils.SyncJob;
 import com.example.ng_tiofack.mynews.utils.Utils;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class NotificationsActivity extends AppCompatActivity {
 
+    //ID for notification job
+    private static int iD;
     // variable for different categories
     boolean[] categories;
     //query item
@@ -61,6 +67,21 @@ public class NotificationsActivity extends AppCompatActivity {
         }
 
         this.switchConfigParams(mSwitch);
+
+
+    }
+
+    private int schedulePeriodicJob() {
+
+        return new JobRequest.Builder(SyncJob.TAG)
+                .setPeriodic(TimeUnit.DAYS.toMillis(1))
+                .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
+                .build()
+                .schedule();
+    }
+
+    private void cancelJob(int jobId) {
+        JobManager.instance().cancel(jobId);
     }
 
     @Override
@@ -71,7 +92,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()== android.R.id.home)
+        if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }
@@ -99,14 +120,16 @@ public class NotificationsActivity extends AppCompatActivity {
 
                         if ((categoriesChecked > 0) && (mSwitch.isChecked())) {
                             mSwitch.setChecked(true);
-
+                            iD = schedulePeriodicJob();
                         } else {
                             mSwitch.setChecked(false);
+                            cancelJob(iD);
                             if (!(categoriesChecked > 0))
                                 Snackbar.make(getWindow().getDecorView().getRootView(), R.string.empty_checkbox_msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                         }
                     } else {
                         mSwitch.setChecked(false);
+                        cancelJob(iD);
                         Snackbar.make(getWindow().getDecorView().getRootView(), R.string.missing_query_item_msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     }
 
