@@ -64,7 +64,6 @@ public class SyncJob extends Job {
 
             @Override
             public void onError(Throwable e) {
-                Log.e("", "une erreur est survenue" + e);
             }
 
             @Override

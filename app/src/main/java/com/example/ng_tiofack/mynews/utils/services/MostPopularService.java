@@ -26,14 +26,13 @@ public interface MostPopularService {
     Gson gson = new GsonBuilder()
             .registerTypeAdapter(MostPopular.Result.class, new MostPopular.Result.OptionsDeserilizer())
             .create();
-
-    @GET("mostviewed/all-sections/1.json")
-    Observable<MostPopular> getApiKeyMostPopular(@Query("api-key") String api_key);
-
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://api.nytimes.com/svc/mostpopular/v2/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(client.build())
             .build();
+
+    @GET("mostviewed/all-sections/1.json")
+    Observable<MostPopular> getApiKeyMostPopular(@Query("api-key") String api_key);
 }

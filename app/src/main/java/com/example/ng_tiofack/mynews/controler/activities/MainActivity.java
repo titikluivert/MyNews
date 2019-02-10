@@ -15,26 +15,21 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.evernote.android.job.JobManager;
-import com.evernote.android.job.JobRequest;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.fragments.MostPopularFragment;
 import com.example.ng_tiofack.mynews.controler.fragments.NewsFragment;
 import com.example.ng_tiofack.mynews.controler.fragments.TopStoriesFragment;
 import com.example.ng_tiofack.mynews.model.SavedValues;
-import com.example.ng_tiofack.mynews.utils.SyncJob;
 import com.example.ng_tiofack.mynews.utils.Utils;
 import com.example.ng_tiofack.mynews.view.adapters.ViewPagerAdapter;
 
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

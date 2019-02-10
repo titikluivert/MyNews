@@ -9,12 +9,13 @@ import java.util.List;
 public class ParamsOptions {
 
     private String[] topicsArray;
+
     public ParamsOptions() {
     }
 
 
-    public ParamsOptions(String [] topicArray) {
-      this.topicsArray = topicArray;
+    public ParamsOptions(String[] topicArray) {
+        this.topicsArray = topicArray;
     }
 
     public SavedValuesParams checkParamsOptions(String search_query_item, String dateBegin, String dateEnd, boolean[] categories) {
