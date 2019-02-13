@@ -40,15 +40,20 @@ public class ParamsOptions {
                     articleChecked.append("\"").append(topicsArray[i]).append("\"").append(" ");
                 }
             }
-            if (!b_article)
+            if (!b_article) {
                 articleChecked = new StringBuilder("news_desk:" + articleChecked.toString().trim() + ")");
+            } else {
+                search_query_item = "SYMPTHOME_III";
+            }
 
-            if ((!(dateBegin == null) && !(dateEnd == null)) && (!dateBegin.isEmpty() && !dateEnd.isEmpty())) {
+            if (!(dateBegin == null)) {
+                if (!(dateEnd == null)) {
 
-                String[] values = splitDateAndTurnToTheCorrectFormat(search_query_item, dateBegin, dateEnd, articles);
-                dateCombinedBegin = values[0];
-                dateCombinedEnd = values[1];
-                search_query_item = values[2];
+                    String[] values = splitDateAndTurnToTheCorrectFormat(search_query_item, dateBegin, dateEnd, articles);
+                    dateCombinedBegin = values[0];
+                    dateCombinedEnd = values[1];
+                    search_query_item = values[2];
+                }
 
             } else {
 
@@ -89,41 +94,54 @@ public class ParamsOptions {
     public String[] splitDateAndTurnToTheCorrectFormat(String s0, String s, String s1, List<String> articles) {
 
         String[] retValue = new String[3];
+        int checkIfBothDateNotEmpty = -1;
 
-        String[] dateBegin = s.split("/");
-        String[] dateEnd = s1.split("/");
-
-        if (dateBegin[0].length() < 2) {
-            dateBegin[0] = "0" + dateBegin[0];
-        }
-
-        if (dateBegin[1].length() < 2) {
-            dateBegin[1] = "0" + dateBegin[1];
-        }
-
-        if (dateEnd[0].length() < 2) {
-            dateEnd[0] = "0" + dateEnd[0];
-        }
-
-        if (dateEnd[1].length() < 2) {
-            dateEnd[1] = "0" + dateEnd[1];
-        }
-
-        retValue[0] = dateBegin[2] + dateBegin[1] + dateBegin[0];
-        retValue[1] = dateEnd[2] + dateEnd[1] + dateEnd[0];
-
-        if (Double.parseDouble(retValue[1]) > Double.parseDouble(retValue[0])) {
-
-            if (articles.isEmpty()) {
-                retValue[2] = "SYMPTHOME_III";
-            } else {
-                retValue[2] = s0;
+        if (!s.isEmpty()) {
+            checkIfBothDateNotEmpty++;
+            String[] dateBegin = s.split("/");
+            if (dateBegin[0].length() < 2) {
+                dateBegin[0] = "0" + dateBegin[0];
             }
 
+            if (dateBegin[1].length() < 2) {
+                dateBegin[1] = "0" + dateBegin[1];
+            }
+
+            retValue[0] = dateBegin[2] + dateBegin[1] + dateBegin[0];
         } else {
-            retValue[2] = "SYMPTHOME_II";
+            retValue[0] = null;
+        }
+
+        if (!s1.isEmpty()) {
+            checkIfBothDateNotEmpty++;
+            String[] dateEnd = s1.split("/");
+            if (dateEnd[0].length() < 2) {
+                dateEnd[0] = "0" + dateEnd[0];
+            }
+
+            if (dateEnd[1].length() < 2) {
+                dateEnd[1] = "0" + dateEnd[1];
+            }
+            retValue[1] = dateEnd[2] + dateEnd[1] + dateEnd[0];
+        } else {
+
+            retValue[1] = null;
+        }
+        if (checkIfBothDateNotEmpty == 1) {
+            if (Double.parseDouble(retValue[1]) > Double.parseDouble(retValue[0])) {
+
+                retValue[2] = s0;
+            } else {
+                retValue[2] = "SYMPTHOME_II";
+            }
+        } else {
+            retValue[2] = s0;
+        }
+        if (articles.isEmpty()) {
+            retValue[2] = "SYMPTHOME_III";
         }
 
         return retValue;
+
     }
 }

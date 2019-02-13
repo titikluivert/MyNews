@@ -38,26 +38,36 @@ public class NewViewHolder extends RecyclerView.ViewHolder {
         this.texSectionSubsection.setText(news.getDocumentType());
         this.dateText.setText(Utils.getConvertDate(news.getPubDate()));
 
+
+        String missingPath = "https://nytimes.com/";
+        Object LogoIfMissing = null;
+
         switch (news.getNewsDesk()) {
 
             case "Arts":
-                glide.load(R.drawable.artlogo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                LogoIfMissing = R.drawable.artlogo;
                 break;
             case "Health & Fitness":
-                glide.load(R.drawable.healthfitnesslogo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                LogoIfMissing = R.drawable.healthfitnesslogo;
                 break;
             case "Science":
-                glide.load(R.drawable.sciencelogo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                LogoIfMissing = R.drawable.sciencelogo;
                 break;
             case "Your Money":
-                glide.load(R.drawable.yourmoneylogo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                LogoIfMissing = R.drawable.yourmoneylogo;
                 break;
             case "Business":
-                glide.load(R.drawable.business_logo).apply(RequestOptions.circleCropTransform()).into(imageView);
+                LogoIfMissing = R.drawable.business_logo;
                 break;
             default:
-                glide.load(R.drawable.file_search).apply(RequestOptions.circleCropTransform()).into(imageView);
+                LogoIfMissing = R.drawable.file_search;
                 break;
+        }
+
+        if (news.getMultimedia().size() == 0) {
+            glide.load(LogoIfMissing).apply(RequestOptions.circleCropTransform()).into(imageView);
+        } else {
+            glide.load(missingPath + news.getMultimedia().get(0).getUrl()).apply(RequestOptions.circleCropTransform()).into(imageView);
         }
     }
 }

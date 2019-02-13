@@ -65,9 +65,7 @@ public class NotificationsActivity extends AppCompatActivity {
         for (int i = 0; i < categories.length; i++) {
             chbx_search[i].setChecked(categories[i]);
         }
-
         this.switchConfigParams(mSwitch);
-
 
     }
 

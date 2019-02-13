@@ -1,11 +1,8 @@
 package com.example.ng_tiofack.mynews;
 
 import android.content.Intent;
-import android.support.test.espresso.ViewAction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-
-import com.example.ng_tiofack.mynews.controler.activities.NotificationsActivity;
 import com.example.ng_tiofack.mynews.controler.activities.SearchActivity;
 
 import org.junit.Rule;
@@ -32,11 +29,9 @@ public class SearchActivityTest {
     @Test
     public void  actionWithViewsTest() {
         rule.launchActivity(new Intent());
-        onView(withId(R.id.editText_notiification)).perform(typeText("macron"));
-        onView(withId(R.id.checkBox3)).check(matches(not(isChecked()))).perform(click());
-        onView(withId(R.id.enable_notifications)).perform(click());
+        onView(withId(R.id.searchqueryitem)).perform(typeText("macron"));
+        onView(withId(R.id.checkBoxpolitics)).check(matches(not(isChecked()))).perform(click());
+        onView(withId(R.id.search_button)).perform(click());
 
     }
-
-
 }

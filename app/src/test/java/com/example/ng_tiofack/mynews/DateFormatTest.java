@@ -51,6 +51,16 @@ public class DateFormatTest {
         retValue = mParamsOptions.splitDateAndTurnToTheCorrectFormat(queryItem, date, date1, articles);
         Assert.assertEquals("20180228", retValue[0]);
         Assert.assertEquals("20180126", retValue[1]);
+        Assert.assertEquals("SYMPTHOME_III", retValue[2]);
+
+
+        date = "28/2/2018";
+        date1 = "26/1/2018";
+        queryItem = "trump";
+        articles.add("Politics");
+        retValue = mParamsOptions.splitDateAndTurnToTheCorrectFormat(queryItem, date, date1, articles);
+        Assert.assertEquals("20180228", retValue[0]);
+        Assert.assertEquals("20180126", retValue[1]);
         Assert.assertEquals("SYMPTHOME_II", retValue[2]);
 
 

@@ -66,6 +66,7 @@ public class NewsFragment extends Fragment {
         if (getArguments() != null) {
             String result = getArguments().getString(ARG_PARAM1);
             this.configureSwipeRefreshLayout(result);
+            assert result != null;
             this.executeHttpRequestWithRetrofitNews(result);
         }
 
