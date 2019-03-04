@@ -33,7 +33,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    static final int REQUEST_CODE = 1 ;
+    static final int REQUEST_CODE = 1;
     // Saved values class
     SavedValues mySavedValues;
     // define an ActionBarDrawerToggle

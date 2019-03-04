@@ -24,7 +24,7 @@ public abstract class BaseSearchNotifyActivity extends AppCompatActivity {
     //switch button to enable or disable notifications
     protected Switch mSwitch;
     protected CheckBox[] checkboxSearch;
-    protected ImageButton imgBtn,imgBtn1;
+    protected ImageButton imgBtn, imgBtn1;
     protected Button searchBtn;
 
     @Override

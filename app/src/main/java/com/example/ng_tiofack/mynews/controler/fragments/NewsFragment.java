@@ -82,6 +82,7 @@ public class NewsFragment extends Fragment {
         super.onDestroy();
         this.disposeWhenDestroy();
     }
+
     // 2 - Configure the SwipeRefreshLayout
     private void configureSwipeRefreshLayout(final String result) {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -91,6 +92,7 @@ public class NewsFragment extends Fragment {
             }
         });
     }
+
     // -----------------
     // CONFIGURATION
     // -----------------
@@ -159,13 +161,12 @@ public class NewsFragment extends Fragment {
 
             @Override
             public void onNext(ArticlesNews results) {
-              if(results.getResponse().getMeta().getHits() > 0)
-                updateUI(results.getResponse().getDocs());
-              else
-              {
-                  myResultsList.clear();
-                  adapter.setDocList(myResultsList);
-              }
+                if (results.getResponse().getMeta().getHits() > 0)
+                    updateUI(results.getResponse().getDocs());
+                else {
+                    myResultsList.clear();
+                    adapter.setDocList(myResultsList);
+                }
             }
 
             @Override

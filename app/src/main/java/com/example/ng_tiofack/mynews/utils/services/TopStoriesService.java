@@ -18,16 +18,16 @@ import retrofit2.http.Query;
 public interface TopStoriesService {
 
 
-  HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-  OkHttpClient.Builder client = new OkHttpClient.Builder()
-          .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
-  Retrofit retrofit = new Retrofit.Builder()
-          .baseUrl("https://api.nytimes.com/svc/topstories/v2/")
-          .addConverterFactory(GsonConverterFactory.create())
-          .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-          .client(client.build())
-          .build();
+    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+    OkHttpClient.Builder client = new OkHttpClient.Builder()
+            .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("https://api.nytimes.com/svc/topstories/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(client.build())
+            .build();
 
-  @GET("home.json")
-  Observable<TopStories> getApiKey(@Query("api-key") String api_key);
+    @GET("home.json")
+    Observable<TopStories> getApiKey(@Query("api-key") String api_key);
 }

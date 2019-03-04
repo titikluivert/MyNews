@@ -78,6 +78,7 @@ public class MostPopularFragment extends Fragment {
             }
         });
     }
+
     // -----------------
     // CONFIGURATION
     // -----------------
@@ -106,6 +107,7 @@ public class MostPopularFragment extends Fragment {
                     }
                 });
     }
+
     // -------------------
     // HTTP (RxJAVA)
     // -------------------

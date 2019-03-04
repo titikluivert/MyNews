@@ -3,11 +3,13 @@ package com.example.ng_tiofack.mynews;
 import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+
 import com.example.ng_tiofack.mynews.controler.activities.SearchActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -27,7 +29,7 @@ public class SearchActivityTest {
     public ActivityTestRule<SearchActivity> rule = new ActivityTestRule<>(SearchActivity.class, true, false);
 
     @Test
-    public void  actionWithViewsTest() {
+    public void actionWithViewsTest() {
         rule.launchActivity(new Intent());
         onView(withId(R.id.queryitem)).perform(typeText("macron"));
         onView(withId(R.id.checkBoxpolitics)).check(matches(not(isChecked()))).perform(click());
