@@ -33,6 +33,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    static final int REQUEST_CODE = 1 ;
     // Saved values class
     SavedValues mySavedValues;
     // define an ActionBarDrawerToggle
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.configureToolbar();
@@ -159,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1) {
+        if (requestCode == REQUEST_CODE) {
 
             if (resultCode == RESULT_OK) {
 

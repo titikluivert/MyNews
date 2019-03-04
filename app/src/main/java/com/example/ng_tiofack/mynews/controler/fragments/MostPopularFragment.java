@@ -42,7 +42,7 @@ public class MostPopularFragment extends Fragment {
     // 1 - Declare the SwipeRefreshLayout
     @BindView(R.id.fragment_most_popular_swipe_container)
     SwipeRefreshLayout swipeRefreshLayout;
-    MostPopular.Result mostpopularRersponse;
+    MostPopular.Result mostPopularResponse;
     //FOR DATA
     private Disposable disposable;
     // 2 - Declare list of results (MostPopular) & Adapter
@@ -81,7 +81,6 @@ public class MostPopularFragment extends Fragment {
     // -----------------
     // CONFIGURATION
     // -----------------
-
     // 3 - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // 3.1 - Reset list
@@ -100,9 +99,9 @@ public class MostPopularFragment extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        mostpopularRersponse = adapter.getMostPopularResults(position);
+                        mostPopularResponse = adapter.getMostPopularResults(position);
                         Intent myIntent = new Intent(getActivity(), WebViewActivity.class);
-                        myIntent.putExtra(getString(R.string.articleUrl), mostpopularRersponse.getUrl());
+                        myIntent.putExtra(getString(R.string.articleUrl), mostPopularResponse.getUrl());
                         startActivity(myIntent);
                     }
                 });
@@ -110,7 +109,6 @@ public class MostPopularFragment extends Fragment {
     // -------------------
     // HTTP (RxJAVA)
     // -------------------
-
     private void executeHttpRequestWithRetrofit() {
         this.disposable = MostPopularStreams.streamFetchMostPopular(Utils.apiKeyNYT).subscribeWith(new DisposableObserver<MostPopular>() {
             @Override

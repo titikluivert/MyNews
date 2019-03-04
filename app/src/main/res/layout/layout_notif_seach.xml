@@ -11,7 +11,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/searchqueryitem"
+        android:id="@+id/queryitem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -21,6 +21,7 @@
         android:paddingBottom="20dp" />
 
     <LinearLayout
+        android:id="@+id/notification_layout_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -36,6 +37,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/biginDateRelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -90,6 +92,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/endDateRelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -136,6 +139,21 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/viewNotification"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="20dp"
+        android:background="@android:color/darker_gray" />
+
+    <Switch
+        android:id="@+id/enable_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/enable_notifications_once_per_day" />
 
     <Button
         android:id="@+id/search_button"

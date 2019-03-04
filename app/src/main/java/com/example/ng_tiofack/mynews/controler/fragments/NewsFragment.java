@@ -26,23 +26,27 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
 public class NewsFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
+
+    // 1 - Declare RecyclerView
     @BindView(R.id.fragment_news_recycler_view)
-    RecyclerView recyclerView; // 1 - Declare RecyclerView
+    RecyclerView recyclerView;
 
     // 1 - Declare the SwipeRefreshLayout
     @BindView(R.id.fragment_news_swipe_container)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    //FOR DATA
+    private Disposable disposable;
     // 2 - Declare list of results (MostPopular) & Adapter
     private List<ArticlesNews.Response.Doc> myResultsList;
     private NewAdapter adapter;
     private ArticlesNews.Response.Doc response;
-
 
     public NewsFragment() {
         // Required empty public constructor
@@ -76,8 +80,8 @@ public class NewsFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        this.disposeWhenDestroy();
     }
-
     // 2 - Configure the SwipeRefreshLayout
     private void configureSwipeRefreshLayout(final String result) {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -90,7 +94,6 @@ public class NewsFragment extends Fragment {
     // -----------------
     // CONFIGURATION
     // -----------------
-
     // 3 - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // 3.1 - Reset list
@@ -117,6 +120,9 @@ public class NewsFragment extends Fragment {
                 });
     }
 
+    private void disposeWhenDestroy() {
+        if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
+    }
 
     private void executeHttpRequestWithRetrofitNews(String articles_checked) {
 
@@ -149,11 +155,17 @@ public class NewsFragment extends Fragment {
 
         }
 
-        DisposableObserver<ArticlesNews> disposable = SearchServiceStreams.streamFetchSearchItems(query_item, articles__checked, begin_date, begin_end, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
+        this.disposable = SearchServiceStreams.streamFetchSearchItems(query_item, articles__checked, begin_date, begin_end, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
 
             @Override
             public void onNext(ArticlesNews results) {
+              if(results.getResponse().getMeta().getHits() > 0)
                 updateUI(results.getResponse().getDocs());
+              else
+              {
+                  myResultsList.clear();
+                  adapter.setDocList(myResultsList);
+              }
             }
 
             @Override

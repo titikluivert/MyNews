@@ -3,10 +3,6 @@ package com.example.ng_tiofack.mynews.controler.activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,15 +17,13 @@ import com.example.ng_tiofack.mynews.model.SavedValuesParams;
 import com.irozon.sneaker.Sneaker;
 
 import java.util.Calendar;
-import java.util.Objects;
 
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends BaseSearchNotifyActivity {
 
 
     private DatePickerDialog mDatePickerDialog;
     private Calendar calendar;
-    private EditText dateBegin, dateEnd, search_query_item;
     private int year, month, day;
     private ParamsOptions mParamsOptions;
     private boolean[] categories;
@@ -37,45 +31,15 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        this.configureToolbar();
-
-        dateBegin = findViewById(R.id.bigindateText);
-        ImageButton imgBtn = findViewById(R.id.bigindatepicker);
 
         mParamsOptions = new ParamsOptions(this.getResources().getStringArray(R.array.topicArray));
 
-        dateEnd = findViewById(R.id.enddateText);
-        ImageButton imgBtn1 = findViewById(R.id.enddatepicker);
         this.datePickerMethod(imgBtn, dateBegin);
         this.datePickerMethod(imgBtn1, dateEnd);
 
-        Button searchBtn = findViewById(R.id.search_button);
-        search_query_item = findViewById(R.id.searchqueryitem);
-        final CheckBox[] checkbox_search = {findViewById(R.id.checkBoxArt), findViewById(R.id.checkBoxBusiness), findViewById(R.id.checkBoxEntrepreneurs),
-                findViewById(R.id.checkBoxpolitics), findViewById(R.id.checkBoxsports), findViewById(R.id.checkBoxtravel)};
-
-        if (categories == null) categories = new boolean[checkbox_search.length];
-        this.configCategories(checkbox_search);
+        if (categories == null) categories = new boolean[checkboxSearch.length];
+        this.configCategories(checkboxSearch);
         this.searchButtonMethod(searchBtn);
-    }
-
-    private void configureToolbar() {
-        //Get the toolbar (Serialise)
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        //Set the toolbar
-        setSupportActionBar(toolbar);
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
-        // Enable the Up button
-        Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home)
-            finish();
-        return super.onOptionsItemSelected(item);
     }
 
     private void searchButtonMethod(Button searchButton) {
@@ -85,7 +49,7 @@ public class SearchActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    SavedValuesParams savedValuesParams = mParamsOptions.checkParamsOptions(search_query_item.getText().toString(), dateBegin.getText().toString(), dateEnd.getText().toString(), categories);
+                    SavedValuesParams savedValuesParams = mParamsOptions.checkParamsOptions(queryItem.getText().toString(), dateBegin.getText().toString(), dateEnd.getText().toString(), categories);
 
                     switch (savedValuesParams.getQueryItem()) {
                         case "SYMPTHOME_I":
@@ -130,7 +94,8 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private void configCategories(CheckBox[] checkBoxes) {
+    @Override
+    protected void configCategories(CheckBox[] checkBoxes) {
 
         if (checkBoxes != null) {
 
@@ -147,6 +112,14 @@ public class SearchActivity extends AppCompatActivity {
                         });
             }
         }
+    }
+
+    @Override
+    protected void hideElements() {
+
+        // hide date und search button for search view.
+        findViewById(R.id.enable_notifications).setVisibility(View.GONE);
+        findViewById(R.id.viewNotification).setVisibility(View.GONE);
     }
 
     private void datePickerMethod(ImageButton imageButton, final EditText date_view) {

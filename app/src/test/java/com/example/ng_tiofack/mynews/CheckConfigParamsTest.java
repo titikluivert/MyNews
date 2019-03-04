@@ -1,4 +1,5 @@
 package com.example.ng_tiofack.mynews;
+
 import com.example.ng_tiofack.mynews.model.ParamsOptions;
 import com.example.ng_tiofack.mynews.model.SavedValuesParams;
 
@@ -25,10 +26,10 @@ public class CheckConfigParamsTest {
 
 
         mSavedValuesParams = mParamsOptions.checkParamsOptions(search_query_item, dateView, dateView1, categories);
-        Assert.assertEquals( "macron",mSavedValuesParams.getQueryItem());
-        Assert.assertEquals( "20180201", mSavedValuesParams.getDatebegin());
-        Assert.assertEquals( "20180426", mSavedValuesParams.getDateend());
-        Assert.assertEquals( "news_desk:(\"" + arrayTopic[3] + "\")", mSavedValuesParams.getArticleschecked());
+        Assert.assertEquals("macron", mSavedValuesParams.getQueryItem());
+        Assert.assertEquals("20180201", mSavedValuesParams.getDatebegin());
+        Assert.assertEquals("20180426", mSavedValuesParams.getDateend());
+        Assert.assertEquals("news_desk:(\"" + arrayTopic[3] + "\")", mSavedValuesParams.getArticleschecked());
 
     }
 

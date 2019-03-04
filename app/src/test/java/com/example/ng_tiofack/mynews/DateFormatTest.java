@@ -39,7 +39,7 @@ public class DateFormatTest {
         date = "26/1/2018";
         date1 = "28/12/2018";
         queryItem = "macron";
-        String[] retValue = mParamsOptions.splitDateAndTurnToTheCorrectFormat(queryItem,date, date1, articles);
+        String[] retValue = mParamsOptions.splitDateAndTurnToTheCorrectFormat(queryItem, date, date1, articles);
         Assert.assertEquals("20180126", retValue[0]);
         Assert.assertEquals("20181228", retValue[1]);
         Assert.assertEquals("SYMPTHOME_III", retValue[2]);
@@ -71,7 +71,7 @@ public class DateFormatTest {
         retValue = mParamsOptions.splitDateAndTurnToTheCorrectFormat(queryItem, date, date1, articles);
         Assert.assertEquals("20180126", retValue[0]);
         Assert.assertEquals("20181228", retValue[1]);
-        Assert.assertEquals("maxwell",retValue[2]);
+        Assert.assertEquals("maxwell", retValue[2]);
 
 
     }

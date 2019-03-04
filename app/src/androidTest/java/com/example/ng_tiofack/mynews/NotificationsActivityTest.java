@@ -42,7 +42,7 @@ public class NotificationsActivityTest {
     @Test
     public void  ClassUnderTest() {
         rule.launchActivity(new Intent());
-        onView(withId(R.id.editText_notiification)).check(matches(withHint(R.string.search_query_term)));
+        onView(withId(R.id.queryitem)).check(matches(withHint(R.string.search_query_term)));
         onView(withText(R.string.business)).check(matches(isDisplayed()));
         onView(withText(R.string.entrepreneurs)).check(matches(isDisplayed()));
         onView(withText(R.string.politics)).check(matches(isDisplayed()));
@@ -54,11 +54,11 @@ public class NotificationsActivityTest {
     @Test
     public void  viewsOnUITest() {
         rule.launchActivity(new Intent());
-        onView(withId(R.id.checkBox1)).check(matches(hasSibling(withId(R.id.checkBox2))));
-        onView(withId(R.id.checkBox1)).check(matches(hasSibling(withId(R.id.checkBox3))));
-        onView(withId(R.id.checkBox5)).check(matches(hasSibling(withId(R.id.checkBox4))));
-        onView(withId(R.id.checkBox5)).check(matches(hasSibling(withId(R.id.checkBox6))));
-        onView(withId(R.id.notification_layout_container)).check(matches(hasDescendant(withId(R.id.checkBox6))));
+        onView(withId(R.id.checkBoxArt)).check(matches(hasSibling(withId(R.id.checkBoxBusiness))));
+        onView(withId(R.id.checkBoxArt)).check(matches(hasSibling(withId(R.id.checkBoxEntrepreneurs))));
+        onView(withId(R.id.checkBoxsports)).check(matches(hasSibling(withId(R.id.checkBoxpolitics))));
+        onView(withId(R.id.checkBoxsports)).check(matches(hasSibling(withId(R.id.checkBoxtravel))));
+        onView(withId(R.id.notification_layout_container)).check(matches(hasDescendant(withId(R.id.checkBoxtravel))));
         onView(withId(R.id.enable_notifications)).check(matches(isEnabled()));
 
     }
@@ -66,8 +66,8 @@ public class NotificationsActivityTest {
     @Test
     public void  actionWithViewsTest() {
         rule.launchActivity(new Intent());
-        onView(withId(R.id.editText_notiification)).perform(typeText("macron"));
-        onView(withId(R.id.checkBox3)).check(matches(not(isChecked()))).perform(click());
+        onView(withId(R.id.queryitem)).perform(typeText("macron"));
+        onView(withId(R.id.checkBoxEntrepreneurs)).check(matches(not(isChecked()))).perform(click());
         onView(withId(R.id.enable_notifications)).perform(click());
 
     }

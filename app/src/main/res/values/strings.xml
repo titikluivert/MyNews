@@ -54,4 +54,5 @@
         <item> @string/travel</item>
 
     </string-array>
+    <string name="title_activity_base_seach_notif">BaseSeachNotifActivity</string>
 </resources>

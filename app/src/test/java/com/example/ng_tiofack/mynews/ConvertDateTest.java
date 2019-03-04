@@ -5,7 +5,7 @@ import com.example.ng_tiofack.mynews.utils.Utils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -15,8 +15,7 @@ import static org.junit.Assert.*;
 public class ConvertDateTest {
 
     @Test
-    public void convert_date ()
-    {
+    public void convert_date() {
         String date = "2018-10-30T11:30:50-04:00";
         Assert.assertEquals("30/10/2018", Utils.getConvertDate(date));
 

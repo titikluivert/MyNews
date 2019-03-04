@@ -29,7 +29,7 @@ public class SearchActivityTest {
     @Test
     public void  actionWithViewsTest() {
         rule.launchActivity(new Intent());
-        onView(withId(R.id.searchqueryitem)).perform(typeText("macron"));
+        onView(withId(R.id.queryitem)).perform(typeText("macron"));
         onView(withId(R.id.checkBoxpolitics)).check(matches(not(isChecked()))).perform(click());
         onView(withId(R.id.search_button)).perform(click());
 

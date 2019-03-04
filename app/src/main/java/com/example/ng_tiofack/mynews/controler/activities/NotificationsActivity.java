@@ -2,15 +2,11 @@ package com.example.ng_tiofack.mynews.controler.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
 
 import com.evernote.android.job.JobManager;
@@ -20,19 +16,14 @@ import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.utils.SyncJob;
 import com.example.ng_tiofack.mynews.utils.Utils;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class NotificationsActivity extends AppCompatActivity {
+public class NotificationsActivity extends BaseSearchNotifyActivity {
 
     //ID for notification job
     private static int iD;
     // variable for different categories
     boolean[] categories;
-    //query item
-    EditText search_query_item;
-    //switch button to enable or disable notifications
-    Switch mSwitch;
     //Saved values class
     SavedValues mySavedValues;
     //flag to check if the categories are checked or not
@@ -41,29 +32,22 @@ public class NotificationsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notifications);
-        this.configureToolbar();
-
-        mSwitch = findViewById(R.id.enable_notifications);
-        search_query_item = findViewById(R.id.editText_notiification);
-        final CheckBox[] chbx_search = {findViewById(R.id.checkBox1), findViewById(R.id.checkBox2), findViewById(R.id.checkBox3),
-                findViewById(R.id.checkBox4), findViewById(R.id.checkBox5), findViewById(R.id.checkBox6)};
 
         mySavedValues = Utils.getNotificationParam(this);
-        search_query_item.setText(mySavedValues.getqueryItem());
+        queryItem.setText(mySavedValues.getqueryItem());
 
         categories = mySavedValues.getCategories();
-        if (categories == null) categories = new boolean[chbx_search.length];
+        if (categories == null) categories = new boolean[checkboxSearch.length];
 
         mSwitch.setChecked(mySavedValues.getswitchParams());
         this.queryItemWatch();
 
         categoriesChecked = 0;
 
-        this.configCategories(chbx_search);
+        this.configCategories(checkboxSearch);
 
         for (int i = 0; i < categories.length; i++) {
-            chbx_search[i].setChecked(categories[i]);
+            checkboxSearch[i].setChecked(categories[i]);
         }
         this.switchConfigParams(mSwitch);
 
@@ -85,25 +69,7 @@ public class NotificationsActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Utils.saveNotificationParam(NotificationsActivity.this, mSwitch.isChecked(), search_query_item.getText().toString(), categories);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home)
-            finish();
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void configureToolbar() {
-        //Get the toolbar (Serialise)
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        //Set the toolbar
-        setSupportActionBar(toolbar);
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
-        // Enable the Up button
-        Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true);
+        Utils.saveNotificationParam(NotificationsActivity.this, mSwitch.isChecked(), queryItem.getText().toString(), categories);
     }
 
     private void switchConfigParams(final Switch mSwitch) {
@@ -114,7 +80,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    if (!search_query_item.getText().toString().isEmpty()) {
+                    if (!queryItem.getText().toString().isEmpty()) {
 
                         if ((categoriesChecked > 0) && (mSwitch.isChecked())) {
                             mSwitch.setChecked(true);
@@ -137,7 +103,8 @@ public class NotificationsActivity extends AppCompatActivity {
         }
     }
 
-    private void configCategories(CheckBox[] checkBoxes) {
+    @Override
+    protected void configCategories(CheckBox[] checkBoxes) {
 
         if (checkBoxes != null) {
 
@@ -162,9 +129,18 @@ public class NotificationsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void hideElements() {
+        // hide date und search button for notification view.
+        findViewById(R.id.biginDateRelLayout).setVisibility(View.GONE);
+        findViewById(R.id.endDateRelLayout).setVisibility(View.GONE);
+        findViewById(R.id.search_button).setVisibility(View.GONE);
+
+    }
+
     private void queryItemWatch() {
 
-        search_query_item.addTextChangedListener(new TextWatcher() {
+        queryItem.addTextChangedListener(new TextWatcher() {
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -172,7 +148,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (search_query_item.getText().toString().isEmpty()) {
+                if (queryItem.getText().toString().isEmpty()) {
                     mSwitch.setChecked(false);
                 }
 

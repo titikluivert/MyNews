@@ -24,7 +24,7 @@ public interface MostPopularService {
 
 
     Gson gson = new GsonBuilder()
-            .registerTypeAdapter(MostPopular.Result.class, new MostPopular.Result.OptionsDeserilizer())
+            .registerTypeAdapter(MostPopular.Result.class, new MostPopular.Result.OptionsDeserializer())
             .create();
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://api.nytimes.com/svc/mostpopular/v2/")

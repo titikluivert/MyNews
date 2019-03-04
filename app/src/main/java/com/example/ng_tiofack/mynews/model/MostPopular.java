@@ -267,7 +267,7 @@ public class MostPopular {
             this.media = media;
         }
 
-        public static class OptionsDeserilizer implements JsonDeserializer<Result> {
+        public static class OptionsDeserializer implements JsonDeserializer<Result> {
 
             @Override
             public Result deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
