@@ -3,7 +3,6 @@ package com.example.ng_tiofack.mynews.controler.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,7 +24,6 @@ import com.example.ng_tiofack.mynews.view.adapters.NewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +49,8 @@ public class NewsFragment extends Fragment {
     private NewAdapter adapter;
     private ArticlesNews.Response.Doc response;
 
+    private static String searchDataFromUser;
+
     public NewsFragment() {
         // Required empty public constructor
     }
@@ -58,6 +58,7 @@ public class NewsFragment extends Fragment {
     public static NewsFragment newInstance(String result) {
         NewsFragment fragment = new NewsFragment();
         Bundle args = new Bundle();
+        searchDataFromUser = result;
         args.putString(ARG_PARAM1, result);
         fragment.setArguments(args);
         return fragment;
@@ -71,10 +72,9 @@ public class NewsFragment extends Fragment {
         // 4 - Configure the SwipeRefreshLayout
         this.configureOnClickRecyclerView();
         if (getArguments() != null) {
-            String result = getArguments().getString(ARG_PARAM1);
-            this.configureSwipeRefreshLayout(result);
-            assert result != null;
-            this.executeHttpRequestWithRetrofitNews(result);
+            this.configureSwipeRefreshLayout(searchDataFromUser);
+            assert searchDataFromUser != null;
+            this.executeHttpRequestWithRetrofitNews(searchDataFromUser);
         }
 
         return view;
