@@ -3,6 +3,7 @@ package com.example.ng_tiofack.mynews.controler.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ng_tiofack.mynews.R;
@@ -23,6 +25,7 @@ import com.example.ng_tiofack.mynews.view.adapters.NewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -166,6 +169,7 @@ public class NewsFragment extends Fragment {
                 else {
                     myResultsList.clear();
                     adapter.setDocList(myResultsList);
+                    Toast.makeText(getContext(),getString(R.string.No_result_was_were_found), Toast.LENGTH_SHORT).show();
                 }
             }
 

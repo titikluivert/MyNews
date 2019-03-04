@@ -42,7 +42,7 @@
     <string name="no_result_search">no result was found</string>
     <string name="empty_checkbox_msg">you must check a list one box</string>
     <string name="missing_query_item_msg">you must enter a query item</string>
-    <string name="helloworl">hello world</string>
+    <string name="No_result_was_were_found">No result(s) was / were found</string>
 
     <string-array name="topicArray">
 
