@@ -18,31 +18,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".controler.activities.BaseSearchNotifyActivity"
-            android:label="@string/title_activity_base_seach_notif"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity
             android:name=".controler.activities.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- A child of the main activity -->
         <activity
             android:name=".controler.activities.SearchActivity"
             android:label="@string/search_articles"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".controler.activities.NotificationsActivity"
             android:label="@string/notifications"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".controler.activities.WebViewActivity"
             android:label="@string/webview_title"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

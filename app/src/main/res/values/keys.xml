@@ -3,4 +3,6 @@
     <string name="articleUrl" translatable="false">articleUrl</string>
     <string name="demo_tag" translatable="false">notificationKey</string>
     <string name="results_from_search_activity" translatable="false">resultSearchActivity</string>
+    <string name="results_from_notification_activity" translatable="false">resultNotificationActivity</string>
+    <string name="config_param_notification_activity" translatable="false">configNotificationActivity</string>
 </resources>

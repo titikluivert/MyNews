@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.fragments.MostPopularFragment;
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        // handle notifications results on the main activity
+        this.handleNotificationResults(getIntent());
     }
 
     @Override
@@ -151,12 +154,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    // ----
-    private void launchSearchActivity() {
-        Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
-        this.startActivityForResult(myIntent, 1);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -176,9 +173,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    @Override //won't be called if no singleTop/singleTask attributes are used
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        this.handleNotificationResults(intent);
+    }
+
+    private void launchSearchActivity() {
+        Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+        this.startActivityForResult(myIntent, 1);
+    }
+
     private void launchNotificationActivity() {
         Intent myIntent = new Intent(MainActivity.this, NotificationsActivity.class);
         this.startActivity(myIntent);
+    }
+
+    private void handleNotificationResults(Intent intent) {
+
+        //size from notification activity
+        int numberOfArticlesFoundViaNotification = intent.getIntExtra(getString(R.string.results_from_notification_activity), -1);
+        String notifyConfig = intent.getStringExtra(getString(R.string.config_param_notification_activity));
+
+        if (numberOfArticlesFoundViaNotification != -1) {
+
+            if (numberOfArticlesFoundViaNotification != 0) {
+
+                adapter.updateFragment(2, NewsFragment.newInstance(notifyConfig), "MY NOTIFICATION");
+                viewPager.setCurrentItem(2);
+
+            } else {
+
+                Toast.makeText(this, getString(R.string.No_result_was_were_found), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void alertDialogAbout() {
