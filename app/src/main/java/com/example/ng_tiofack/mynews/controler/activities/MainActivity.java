@@ -197,15 +197,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (numberOfArticlesFoundViaNotification != -1) {
 
-            if (numberOfArticlesFoundViaNotification != 0) {
-
                 adapter.updateFragment(2, NewsFragment.newInstance(notifyConfig), "MY NOTIFICATION");
                 viewPager.setCurrentItem(2);
-
-            } else {
-
-                Toast.makeText(this, getString(R.string.No_result_was_were_found), Toast.LENGTH_SHORT).show();
-            }
         }
     }
 
