@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
+
 import com.evernote.android.job.Job;
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.activities.MainActivity;
@@ -19,7 +20,9 @@ import com.example.ng_tiofack.mynews.model.ParamsOptions;
 import com.example.ng_tiofack.mynews.model.SavedValues;
 import com.example.ng_tiofack.mynews.model.SavedValuesParams;
 import com.example.ng_tiofack.mynews.utils.streams.SearchServiceStreams;
+
 import java.util.Objects;
+
 import io.reactivex.observers.DisposableObserver;
 
 /**
@@ -39,7 +42,6 @@ public class SyncJob extends Job {
         DisposableObserver<ArticlesNews> disposable = SearchServiceStreams.streamFetchSearchItems(mySavedValues.getqueryItem(), savedValuesParams.getArticleschecked(), null, null, Utils.apiKeyNYT).subscribeWith(new DisposableObserver<ArticlesNews>() {
 
 
-
             @Override
             public void onNext(ArticlesNews results) {
 
@@ -53,7 +55,7 @@ public class SyncJob extends Job {
                 Intent resultIntent = new Intent(getContext(), MainActivity.class);
                 resultIntent.putExtra(getContext().getString(R.string.results_from_notification_activity), results.getResponse().getDocs().size());
                 resultIntent.putExtra(getContext().getString(R.string.config_param_notification_activity), mySavedValuesToString(savedValuesParams));
-                PendingIntent resultPendingIntent = PendingIntent.getActivity(getContext(), 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT );
+                PendingIntent resultPendingIntent = PendingIntent.getActivity(getContext(), 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 Notification notification = new NotificationCompat.Builder(getContext(), TAG)
                         .setContentTitle("New notifications")
@@ -89,6 +91,6 @@ public class SyncJob extends Job {
     private String mySavedValuesToString(SavedValuesParams valuesParams) {
         return valuesParams.getQueryItem() + ";" + valuesParams.getArticleschecked() + ";" +
                 "null" + ";" +
-                "null" ;
+                "null";
     }
 }

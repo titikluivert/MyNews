@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.ng_tiofack.mynews.R;
 import com.example.ng_tiofack.mynews.controler.fragments.MostPopularFragment;
@@ -197,8 +196,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (numberOfArticlesFoundViaNotification != -1) {
 
-                adapter.updateFragment(2, NewsFragment.newInstance(notifyConfig), "MY NOTIFICATION");
-                viewPager.setCurrentItem(2);
+            adapter.updateFragment(2, NewsFragment.newInstance(notifyConfig), "MY NOTIFICATION");
+            viewPager.setCurrentItem(2);
         }
     }
 

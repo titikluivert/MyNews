@@ -33,23 +33,19 @@ import io.reactivex.observers.DisposableObserver;
 public class NewsFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
-
+    private static String searchDataFromUser;
     // 1 - Declare RecyclerView
     @BindView(R.id.fragment_news_recycler_view)
     RecyclerView recyclerView;
-
     // 1 - Declare the SwipeRefreshLayout
     @BindView(R.id.fragment_news_swipe_container)
     SwipeRefreshLayout swipeRefreshLayout;
-
     //FOR DATA
     private Disposable disposable;
     // 2 - Declare list of results (MostPopular) & Adapter
     private List<ArticlesNews.Response.Doc> myResultsList;
     private NewAdapter adapter;
     private ArticlesNews.Response.Doc response;
-
-    private static String searchDataFromUser;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -169,7 +165,7 @@ public class NewsFragment extends Fragment {
                 else {
                     myResultsList.clear();
                     adapter.setDocList(myResultsList);
-                    Toast.makeText(getContext(),getString(R.string.No_result_was_were_found), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.No_result_was_were_found), Toast.LENGTH_SHORT).show();
                 }
             }
 
